@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Li Meihan — AI Content Strategist</title>
+  <style>
+    :root {
+      --bg: #F5E8E4;
+      --surface: #FDF8F6;
+      --ink: #1C1614;
+      --body: #3A2E2C;
+      --muted: #9E8480;
+      --mint: #C8E8E4;
+      --rose: #E8B4B0;
+      --rose-card: #F2D4D0;
+      --cream: #F5EDE8;
+      --divider: #E2D4D0;
+      --grid-line: #E8D8D4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 27px,
+        var(--grid-line) 27px,
+        var(--grid-line) 28px
+      );
+      color: var(--body);
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+                   'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 200;
+      padding: 22px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(253, 248, 246, 0.93);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--divider);
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .nav-logo-en {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .nav-logo-zh {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* lang toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: 1px solid var(--divider);
+      padding: 5px 11px;
+      cursor: pointer;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .lang-toggle:hover { border-color: var(--muted); }
+    .lt-label { transition: color 0.2s; }
+    .lt-label.active { color: var(--ink); font-weight: 600; }
+    .lt-sep { color: var(--divider); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--ink);
+      transition: 0.3s;
+    }
+
+    /* ── MOBILE OVERLAY ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 190;
+      background: rgba(253, 248, 246, 0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 44px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 40px;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--muted); }
+    .mobile-close {
+      position: absolute;
+      top: 26px;
+      right: 56px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+    }
+    .hero-label {
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(56px, 7.5vw, 92px);
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.04;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+    }
+    .hero-sub {
+      font-size: 16.5px;
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1.5px solid var(--ink);
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-light { background: transparent; color: var(--ink); }
+    .btn-light:hover { background: var(--ink); color: var(--surface); }
+    .btn-dark { background: var(--ink); color: var(--surface); }
+    .btn-dark:hover { background: transparent; color: var(--ink); }
+
+    /* hero stats card */
+    .hero-stats {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-stats::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--mint);
+    }
+    .stat-row {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-num {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-lbl {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* hero watermark */
+    .hero-wm {
+      position: absolute;
+      bottom: 10vh;
+      right: 56px;
+      font-family: 'Brush Script MT', 'Segoe Script', cursive;
+      font-size: 80px;
+      color: rgba(232, 180, 176, 0.22);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SHARED SECTION STRUCTURE ── */
+    .section-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 100px 56px;
+    }
+    .section-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin-bottom: 72px;
+    }
+    .section-tag {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      margin-bottom: 64px;
+    }
+    .section-num-big {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 88px;
+      line-height: 1;
+      color: rgba(226, 212, 208, 0.6);
+      letter-spacing: -0.04em;
+      margin-right: 20px;
+    }
+    .section-label-text {
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-left: 1px solid var(--divider);
+      padding-left: 20px;
+      line-height: 1;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-hl {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(24px, 2.8vw, 36px);
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 32px;
+    }
+    .about-body p {
+      font-size: 15.5px;
+      color: var(--body);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .about-right {
+      position: relative;
+      padding-top: 8px;
+    }
+    .accent-card-mint {
+      background: var(--mint);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+    }
+    .accent-card-mint p {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 2.1;
+    }
+    .edu-block {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      padding: 24px 28px;
+    }
+    .edu-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .edu-school {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+    .edu-detail {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .rotated-label {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(226, 212, 208, 0.8);
+      white-space: nowrap;
+    }
+
+    /* ── WORK ── */
+    .work-list { list-style: none; }
+    .work-item {
+      display: grid;
+      grid-template-columns: 52px 1fr 180px;
+      gap: 36px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--divider);
+      align-items: start;
+    }
+    .work-item:first-child { border-top: 1px solid var(--divider); }
+    .work-idx {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--rose);
+      padding-top: 3px;
+      letter-spacing: 0.04em;
+    }
+    .work-title {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 21px;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .work-co {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .work-desc {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.75;
+    }
+    .work-date {
+      font-size: 11.5px;
+      color: var(--muted);
+      text-align: right;
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* ── EXPERTISE ── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .exp-card {
+      padding: 36px 28px 40px;
+      position: relative;
+    }
+    .exp-card-num {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 12px;
+      color: rgba(28, 22, 20, 0.35);
+      margin-bottom: 28px;
+      letter-spacing: 0.08em;
+    }
+    .exp-card-title {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 18px;
+    }
+    .exp-card-body {
+      font-size: 13.5px;
+      color: var(--body);
+      line-height: 1.8;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .contact-hl {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(38px, 5vw, 58px);
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .contact-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .contact-link {
+      display: inline-block;
+      padding: 14px 32px;
+      border: 1.5px solid var(--ink);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      align-self: flex-start;
+      transition: background 0.25s, color 0.25s;
+    }
+    .contact-link:hover { background: var(--ink); color: var(--surface); }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 36px 56px;
+      border-top: 1px solid var(--divider);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-sig {
+      font-family: 'Brush Script MT', 'Segoe Script', cursive;
+      font-size: 26px;
+      color: var(--rose);
+      letter-spacing: 0.04em;
+    }
+    .footer-meta {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.42s; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 28px; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .mobile-close { right: 28px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 0 28px;
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 64px;
+      }
+      .hero-title { font-size: 52px; }
+      .hero-wm { font-size: 56px; bottom: 16px; right: 28px; }
+
+      .section-wrap { padding: 72px 28px; }
+      .section-num-big { font-size: 60px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .rotated-label { display: none; }
+
+      .work-item { grid-template-columns: 44px 1fr; gap: 16px; }
+      .work-date { display: none; }
+
+      .expertise-grid { grid-template-columns: 1fr; gap: 14px; }
+
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+
+      footer { padding: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 42px; }
+      .hero-sub { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-en">Li Meihan</span>
+    <span class="nav-logo-zh">李美涵</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-t="nav-about">About</a></li>
+    <li><a href="#work" data-t="nav-work">Work</a></li>
+    <li><a href="#expertise" data-t="nav-expertise">Expertise</a></li>
+    <li><a href="#contact" data-t="nav-contact">Contact</a></li>
+  </ul>
+  <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+    <span class="lt-label active" data-lang="en">EN</span>
+    <span class="lt-sep">·</span>
+    <span class="lt-label" data-lang="zh">中</span>
+  </button>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="#about" class="mm-link" data-t="nav-about">About</a>
+  <a href="#work" class="mm-link" data-t="nav-work">Work</a>
+  <a href="#expertise" class="mm-link" data-t="nav-expertise">Expertise</a>
+  <a href="#contact" class="mm-link" data-t="nav-contact">Contact</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-label reveal" data-t="hero-label">AI Content &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Translation</p>
+    <h1 class="hero-title reveal d1" data-t="hero-title">Bridging<br>AI &amp;<br>Human<br>Stories</h1>
+    <p class="hero-sub reveal d2" data-t="hero-sub">Content strategist with 3 years deep in LLMs, AI Agents, and enterprise AI — now moving toward product strategy.</p>
+    <div class="hero-buttons reveal d3">
+      <a href="#work" class="btn btn-light" data-t="hero-btn-work">View Work</a>
+      <a href="#contact" class="btn btn-dark" data-t="hero-btn-contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats reveal d2">
+    <div class="stat-row">
+      <div class="stat-num">10万+</div>
+      <div class="stat-lbl" data-t="stat-lbl-1">Peak Article Views</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">300,000+</div>
+      <div class="stat-lbl" data-t="stat-lbl-2">Peak Live Viewers</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">50+</div>
+      <div class="stat-lbl" data-t="stat-lbl-3">Monthly Sales Leads</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">3 yrs</div>
+      <div class="stat-lbl" data-t="stat-lbl-4">AI Industry Focus</div>
+    </div>
+  </div>
+  <div class="hero-wm">李美涵</div>
+</section>
+
+<!-- ── ABOUT ── -->
+<div class="section-wrap" id="about">
+  <div class="section-rule"></div>
+  <div class="section-tag reveal">
+    <span class="section-num-big">01</span>
+    <span class="section-label-text" data-t="sec-about">About</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <h2 class="about-hl" data-t="about-hl">Where technical depth<br>meets narrative clarity</h2>
+      <p data-t="about-p1">I write about AI the way engineers think about it — with precision, curiosity, and an eye for what actually matters. Three years tracking LLMs from GPT-3 to DeepSeek, from research papers to enterprise deployments.</p>
+      <p data-t="about-p2">My background spans digital media, advertising strategy, and live tech event production. Fluent in both Mandarin and English, I move between Chinese AI ecosystem reporting and global product thinking without losing nuance.</p>
+      <p data-t="about-p3">I'm currently seeking roles in AI product strategy, product operations, or technical content leadership — anywhere I can use deep AI understanding to shape what gets built and how it gets communicated.</p>
+    </div>
+    <div class="about-right reveal d1">
+      <div class="accent-card-mint">
+        <p data-t="about-card">CET-6 English<br>Mandarin Native<br>3 yrs AI Focus<br>Beijing-based</p>
+      </div>
+      <div class="edu-block">
+        <div class="edu-label" data-t="edu-label">Education</div>
+        <div class="edu-school" data-t="edu-school-1">Tianjin Foreign Studies University<br>M.A. Advertising · GPA 3.82</div>
+        <div class="edu-detail" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
+          <div class="edu-school" data-t="edu-school-2">Shandong Normal University</div>
+          <div style="font-size:12px; color:var(--muted);" data-t="edu-degree-2">B.A. Digital Media Art</div>
+        </div>
+      </div>
+      <div class="rotated-label" data-t="rotated-label">AI · Content · Strategy · Translation</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WORK ── -->
+<div class="section-wrap" id="work">
+  <div class="section-rule"></div>
+  <div class="section-tag reveal">
+    <span class="section-num-big">02</span>
+    <span class="section-label-text" data-t="sec-work">Work</span>
+  </div>
+  <ul class="work-list">
+    <li class="work-item reveal">
+      <span class="work-idx">01.</span>
+      <div>
+        <div class="work-title" data-t="work-title-1">B2B Content Operations</div>
+        <div class="work-co" data-t="work-co-1">Alpha AI &nbsp;·&nbsp; AlphaGPT Legal</div>
+        <p class="work-desc" data-t="work-desc-1">Managed brand content for AlphaGPT, a legal-domain AI product. Case studies consistently exceeded 10,000 views; generated 50+ monthly sales leads. Coordinated a legal industry leaders summit — 200+ law firm partners, 300,000+ online viewers. Post-event PR coverage in major AI media outlets.</p>
+      </div>
+      <div class="work-date" data-t="work-date-1">Nov 2025<br>Mar 2026</div>
+    </li>
+    <li class="work-item reveal d1">
+      <span class="work-idx">02.</span>
+      <div>
+        <div class="work-title" data-t="work-title-2">AI Technical Editor</div>
+        <div class="work-co" data-t="work-co-2">51CTO</div>
+        <p class="work-desc" data-t="work-desc-2">Covered the LLM landscape — OpenAI, Meta, DeepSeek, and frontier labs. Multiple articles exceeded 10,000 views; several reached 100,000+. Authored in-depth DeepSeek R1 product analysis. Built and produced an end-to-end tech short video series from concept to final cut.</p>
+      </div>
+      <div class="work-date" data-t="work-date-2">Feb 2024<br>Sep 2025</div>
+    </li>
+    <li class="work-item reveal d2">
+      <span class="work-idx">03.</span>
+      <div>
+        <div class="work-title" data-t="work-title-3">Conference Editor</div>
+        <div class="work-co" data-t="work-co-3">LiveVideoStack</div>
+        <p class="work-desc" data-t="work-desc-3">Led the AIGC &amp; Audio-Video Future interview series with AI leads from Netease Cloud Music, TeSight, and Lizhi. Coordinated a 300-person tech conference across 13 tracks with 70+ speakers from ByteDance, Tencent Cloud, Alibaba Cloud, and Kuaishou. Conference NPS: 77.32.</p>
+      </div>
+      <div class="work-date" data-t="work-date-3">Jun 2023<br>Jan 2024</div>
+    </li>
+    <li class="work-item reveal d3">
+      <span class="work-idx">04.</span>
+      <div>
+        <div class="work-title" data-t="work-title-4">Content Operations Intern</div>
+        <div class="work-co" data-t="work-co-4">Analysys (易观)</div>
+        <p class="work-desc" data-t="work-desc-4">B2B content and whitepaper production. Co-produced the "DTC Brand Private Domain User Operations Manual" — 2,000+ downloads in the first month. Followed up on 228 inbound leads with 5 direct conversions. Grew WeChat Official Account by 5,000+ followers.</p>
+      </div>
+      <div class="work-date" data-t="work-date-4">Jul 2021<br>Dec 2021</div>
+    </li>
+  </ul>
+</div>
+
+<!-- ── EXPERTISE ── -->
+<div class="section-wrap" id="expertise">
+  <div class="section-rule"></div>
+  <div class="section-tag reveal">
+    <span class="section-num-big">03</span>
+    <span class="section-label-text" data-t="sec-expertise">Expertise</span>
+  </div>
+  <div class="expertise-grid">
+    <div class="exp-card reveal" style="background: var(--mint);">
+      <div class="exp-card-num">01 —</div>
+      <h3 class="exp-card-title" data-t="exp-title-1">AI Industry Intelligence</h3>
+      <p class="exp-card-body" data-t="exp-body-1">Deep familiarity with the LLM landscape — model capabilities, enterprise adoption patterns, competitive dynamics. I follow the research so you don't have to.</p>
+    </div>
+    <div class="exp-card reveal d1" style="background: var(--rose-card);">
+      <div class="exp-card-num">02 —</div>
+      <h3 class="exp-card-title" data-t="exp-title-2">Technical Content Strategy</h3>
+      <p class="exp-card-body" data-t="exp-body-2">From prompt engineering explainers to enterprise AI case studies, I translate complex concepts into narratives that move decision-makers and developers alike.</p>
+    </div>
+    <div class="exp-card reveal d2" style="background: var(--cream);">
+      <div class="exp-card-num">03 —</div>
+      <h3 class="exp-card-title" data-t="exp-title-3">Bilingual Bridge</h3>
+      <p class="exp-card-body" data-t="exp-body-3">Native Mandarin + CET-6 English. Equally comfortable with arXiv papers and Baidu World coverage. The Chinese AI ecosystem is often a black box — I make it readable.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<div class="section-wrap" id="contact">
+  <div class="section-rule"></div>
+  <div class="section-tag reveal">
+    <span class="section-num-big">04</span>
+    <span class="section-label-text" data-t="sec-contact">Contact</span>
+  </div>
+  <div class="contact-inner">
+    <h2 class="contact-hl reveal" data-t="contact-hl">Let's build<br>something<br>intelligent.</h2>
+    <div class="contact-right reveal d1">
+      <p class="contact-body" data-t="contact-body">Open to AI product strategy roles, content leadership, and consulting projects. Beijing-based, globally curious.</p>
+      <a href="mailto:limeihan.y@gmail.com" class="contact-link">limeihan.y@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-sig">李美涵</span>
+  <span class="footer-meta" data-t="footer-meta">Beijing &nbsp;·&nbsp; 2026</span>
+</footer>
+
+<script>
+  const T = {
+    en: {
+      'nav-about': 'About',
+      'nav-work': 'Work',
+      'nav-expertise': 'Expertise',
+      'nav-contact': 'Contact',
+      'hero-label': 'AI Content &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Translation',
+      'hero-title': 'Bridging<br>AI &amp;<br>Human<br>Stories',
+      'hero-sub': 'Content strategist with 3 years deep in LLMs, AI Agents, and enterprise AI — now moving toward product strategy.',
+      'hero-btn-work': 'View Work',
+      'hero-btn-contact': 'Get in Touch',
+      'stat-lbl-1': 'Peak Article Views',
+      'stat-lbl-2': 'Peak Live Viewers',
+      'stat-lbl-3': 'Monthly Sales Leads',
+      'stat-lbl-4': 'AI Industry Focus',
+      'sec-about': 'About',
+      'sec-work': 'Work',
+      'sec-expertise': 'Expertise',
+      'sec-contact': 'Contact',
+      'about-hl': 'Where technical depth<br>meets narrative clarity',
+      'about-p1': 'I write about AI the way engineers think about it — with precision, curiosity, and an eye for what actually matters. Three years tracking LLMs from GPT-3 to DeepSeek, from research papers to enterprise deployments.',
+      'about-p2': 'My background spans digital media, advertising strategy, and live tech event production. Fluent in both Mandarin and English, I move between Chinese AI ecosystem reporting and global product thinking without losing nuance.',
+      'about-p3': "I'm currently seeking roles in AI product strategy, product operations, or technical content leadership — anywhere I can use deep AI understanding to shape what gets built and how it gets communicated.",
+      'about-card': 'CET-6 English<br>Mandarin Native<br>3 yrs AI Focus<br>Beijing-based',
+      'edu-label': 'Education',
+      'edu-school-1': 'Tianjin Foreign Studies University<br>M.A. Advertising · GPA 3.82',
+      'edu-school-2': 'Shandong Normal University',
+      'edu-degree-2': 'B.A. Digital Media Art',
+      'rotated-label': 'AI · Content · Strategy · Translation',
+      'work-title-1': 'B2B Content Operations',
+      'work-co-1': 'Alpha AI &nbsp;·&nbsp; AlphaGPT Legal',
+      'work-desc-1': 'Managed brand content for AlphaGPT, a legal-domain AI product. Case studies consistently exceeded 10,000 views; generated 50+ monthly sales leads. Coordinated a legal industry leaders summit — 200+ law firm partners, 300,000+ online viewers. Post-event PR coverage in major AI media outlets.',
+      'work-date-1': 'Nov 2025<br>Mar 2026',
+      'work-title-2': 'AI Technical Editor',
+      'work-co-2': '51CTO',
+      'work-desc-2': 'Covered the LLM landscape — OpenAI, Meta, DeepSeek, and frontier labs. Multiple articles exceeded 10,000 views; several reached 100,000+. Authored in-depth DeepSeek R1 product analysis. Built and produced an end-to-end tech short video series from concept to final cut.',
+      'work-date-2': 'Feb 2024<br>Sep 2025',
+      'work-title-3': 'Conference Editor',
+      'work-co-3': 'LiveVideoStack',
+      'work-desc-3': 'Led the AIGC &amp; Audio-Video Future interview series with AI leads from Netease Cloud Music, TeSight, and Lizhi. Coordinated a 300-person tech conference across 13 tracks with 70+ speakers from ByteDance, Tencent Cloud, Alibaba Cloud, and Kuaishou. Conference NPS: 77.32.',
+      'work-date-3': 'Jun 2023<br>Jan 2024',
+      'work-title-4': 'Content Operations Intern',
+      'work-co-4': 'Analysys (易观)',
+      'work-desc-4': 'B2B content and whitepaper production. Co-produced the "DTC Brand Private Domain User Operations Manual" — 2,000+ downloads in the first month. Followed up on 228 inbound leads with 5 direct conversions. Grew WeChat Official Account by 5,000+ followers.',
+      'work-date-4': 'Jul 2021<br>Dec 2021',
+      'exp-title-1': 'AI Industry Intelligence',
+      'exp-body-1': "Deep familiarity with the LLM landscape — model capabilities, enterprise adoption patterns, competitive dynamics. I follow the research so you don't have to.",
+      'exp-title-2': 'Technical Content Strategy',
+      'exp-body-2': 'From prompt engineering explainers to enterprise AI case studies, I translate complex concepts into narratives that move decision-makers and developers alike.',
+      'exp-title-3': 'Bilingual Bridge',
+      'exp-body-3': 'Native Mandarin + CET-6 English. Equally comfortable with arXiv papers and Baidu World coverage. The Chinese AI ecosystem is often a black box — I make it readable.',
+      'contact-hl': "Let's build<br>something<br>intelligent.",
+      'contact-body': 'Open to AI product strategy roles, content leadership, and consulting projects. Beijing-based, globally curious.',
+      'footer-meta': 'Beijing &nbsp;·&nbsp; 2026',
+    },
+    zh: {
+      'nav-about': '关于',
+      'nav-work': '经历',
+      'nav-expertise': '专长',
+      'nav-contact': '联系',
+      'hero-label': 'AI内容 &nbsp;·&nbsp; 策略 &nbsp;·&nbsp; 翻译',
+      'hero-title': '让AI，<br>讲好<br>人的<br>故事',
+      'hero-sub': '3年深耕大模型、AI Agent与企业级AI的内容策略师 — 正迈向AI产品策略方向。',
+      'hero-btn-work': '查看经历',
+      'hero-btn-contact': '联系我',
+      'stat-lbl-1': '单篇最高阅读量',
+      'stat-lbl-2': '直播峰值观看量',
+      'stat-lbl-3': '月均销售线索',
+      'stat-lbl-4': 'AI行业专注',
+      'sec-about': '关于',
+      'sec-work': '经历',
+      'sec-expertise': '专长',
+      'sec-contact': '联系',
+      'about-hl': '技术深度<br>与叙事清晰的交汇',
+      'about-p1': '我写AI的方式，和工程师思考的方式一样 — 精准、好奇，关注真正重要的事。三年来从GPT-3到DeepSeek，从研究论文到企业落地，全程深度跟踪。',
+      'about-p2': '我的背景跨越数字媒体、广告策略和技术会议制作。中英双语，在中国AI生态报道与全球产品思维之间自如切换，不失细节与层次。',
+      'about-p3': '目前正在寻找AI产品策略、产品运营或技术内容领导力方向的职位 — 任何能将我的AI深度理解转化为产品塑造与传播价值的角色。',
+      'about-card': '英语 CET-6<br>普通话母语<br>3年AI专注<br>北京',
+      'edu-label': '教育背景',
+      'edu-school-1': '天津外国语大学<br>广告学硕士 · GPA 3.82',
+      'edu-school-2': '山东师范大学',
+      'edu-degree-2': '数字媒体艺术学士',
+      'rotated-label': 'AI · 内容 · 策略 · 翻译',
+      'work-title-1': 'B2B内容运营',
+      'work-co-1': 'Alpha AI &nbsp;·&nbsp; AlphaGPT法律AI',
+      'work-desc-1': '负责AlphaGPT法律AI产品的品牌内容运营。案例文章阅读量持续超万次，月均带来50+销售线索。策划执行法律行业领袖峰会 — 现场200+律所合伙人，线上观看量30万+。峰会后期PR报道覆盖主要AI媒体平台。',
+      'work-date-1': '2025年11月<br>2026年3月',
+      'work-title-2': 'AI技术编辑',
+      'work-co-2': '51CTO',
+      'work-desc-2': '深度报道大模型领域 — OpenAI、Meta、DeepSeek及前沿实验室。多篇文章阅读量破万，数篇达10万+。撰写DeepSeek R1深度产品分析。从概念到成片，独立制作完成一整套科技短视频系列。',
+      'work-date-2': '2024年2月<br>2025年9月',
+      'work-title-3': '会议编辑',
+      'work-co-3': 'LiveVideoStack',
+      'work-desc-3': '主导AIGC与音视频未来系列专访，对话网易云音乐、TeSight、荔枝等AI负责人。统筹300人技术大会，共13个专题分论坛，70+位来自字节跳动、腾讯云、阿里云、快手的演讲嘉宾。大会NPS：77.32。',
+      'work-date-3': '2023年6月<br>2024年1月',
+      'work-title-4': '内容运营实习生',
+      'work-co-4': '易观分析',
+      'work-desc-4': 'B2B内容与白皮书生产。联合出品《DTC品牌私域用户运营手册》— 首月下载量2000+。跟进228条线索，完成5单直接转化。微信公众号涨粉5000+。',
+      'work-date-4': '2021年7月<br>2021年12月',
+      'exp-title-1': 'AI行业洞察',
+      'exp-body-1': '对大模型格局了如指掌 — 模型能力、企业采购路径、竞争动态。前沿研究，我替你追。',
+      'exp-title-2': '技术内容策略',
+      'exp-body-2': '从提示工程科普到企业AI案例研究，我将复杂概念转化为能打动决策者与开发者的叙事。',
+      'exp-title-3': '双语桥梁',
+      'exp-body-3': '普通话母语 + CET-6英语。arXiv论文和百度世界大会报道同样驾轻就熟。中国AI生态对外是个黑盒 — 我让它变得可读。',
+      'contact-hl': '一起构建<br>有智识的<br>未来。',
+      'contact-body': '欢迎洽谈AI产品策略职位、内容领导力或咨询合作。北京 · 面向全球。',
+      'footer-meta': '北京 &nbsp;·&nbsp; 2026',
+    }
+  };
+
+  let currentLang = localStorage.getItem('site-lang') || 'en';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('site-lang', lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = lang === 'zh' ? '李美涵 — AI内容策略师' : 'Li Meihan — AI Content Strategist';
+    const t = T[lang];
+    document.querySelectorAll('[data-t]').forEach(el => {
+      const key = el.dataset.t;
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('.lt-label').forEach(span => {
+      span.classList.toggle('active', span.dataset.lang === lang);
+    });
+  }
+
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-close');
+  toggle.addEventListener('click', () => menu.classList.add('open'));
+  closeBtn.addEventListener('click', () => menu.classList.remove('open'));
+  document.querySelectorAll('.mm-link').forEach(a => {
+    a.addEventListener('click', () => menu.classList.remove('open'));
+  });
+
+  // Lang toggle
+  document.getElementById('lang-toggle').addEventListener('click', () => {
+    applyLang(currentLang === 'en' ? 'zh' : 'en');
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hero entrance
+  requestAnimationFrame(() => {
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('in'), 80);
+    });
+  });
+
+  // Apply saved/default language
+  applyLang(currentLang);
+</script>
+
+</body>
+</html>
