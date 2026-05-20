@@ -6,11 +6,13 @@ const PAGE_URL = 'file:///E:/cc-project/profile/index.html';
 const OUT_DIR = path.join(__dirname, 'screenshots');
 
 const SECTIONS = [
+  { id: 'landing',   name: '00-landing' },
   { id: 'hero',      name: '01-hero' },
   { id: 'about',     name: '02-about' },
-  { id: 'work',      name: '03-work' },
-  { id: 'expertise', name: '04-expertise' },
-  { id: 'contact',   name: '05-contact' },
+  { id: 'portfolio', name: '03-portfolio' },
+  { id: 'work',      name: '04-work' },
+  { id: 'expertise', name: '05-expertise' },
+  { id: 'contact',   name: '06-contact' },
 ];
 
 (async () => {
@@ -35,13 +37,6 @@ const SECTIONS = [
 
   await new Promise(r => setTimeout(r, 400));
 
-  // Full-page screenshot
-  await page.screenshot({
-    path: path.join(OUT_DIR, '00-full-page.png'),
-    fullPage: true,
-  });
-  console.log('✓  00-full-page.png');
-
   // Per-section viewport screenshots
   for (const section of SECTIONS) {
     await page.evaluate(id => {
@@ -49,7 +44,7 @@ const SECTIONS = [
       if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
     }, section.id);
 
-    await new Promise(r => setTimeout(r, 150));
+    await new Promise(r => setTimeout(r, 200));
 
     await page.screenshot({
       path: path.join(OUT_DIR, `${section.name}.png`),
@@ -57,40 +52,6 @@ const SECTIONS = [
     console.log(`✓  ${section.name}.png`);
   }
 
-  // Chinese version — switch lang and re-shoot hero
-  await page.evaluate(() => {
-    document.querySelectorAll('[data-t]').forEach(el => {
-      const key = el.dataset.t;
-      const zh = window._zhMap && window._zhMap[key];
-      if (zh) el.innerHTML = zh;
-    });
-  });
-
-  // Build zh map from page's own T object and re-apply
-  await page.evaluate(() => {
-    if (typeof T !== 'undefined') {
-      Object.entries(T.zh).forEach(([key, val]) => {
-        document.querySelectorAll(`[data-t="${key}"]`).forEach(el => {
-          el.innerHTML = val;
-        });
-      });
-      document.querySelectorAll('.lt-label').forEach(span => {
-        span.classList.toggle('active', span.dataset.lang === 'zh');
-      });
-    }
-  });
-
-  await page.evaluate(() => {
-    const el = document.getElementById('hero');
-    if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
-  });
-  await new Promise(r => setTimeout(r, 150));
-
-  await page.screenshot({
-    path: path.join(OUT_DIR, '06-hero-zh.png'),
-  });
-  console.log('✓  06-hero-zh.png');
-
   await browser.close();
-  console.log(`\nAll screenshots saved to ./screenshots/ (${SECTIONS.length + 2} files)`);
+  console.log(`\nAll screenshots saved to ./screenshots/ (${SECTIONS.length} files)`);
 })();

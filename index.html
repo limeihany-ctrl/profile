@@ -559,6 +559,36 @@
       color: var(--muted);
     }
 
+    /* ── LANDING ── */
+    .landing {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .landing-scene {
+      position: relative;
+      width: 1500px;
+      height: 880px;
+      flex-shrink: 0;
+    }
+    .landing-scene img {
+      position: absolute;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .ls-pc     { width: 650px; left:  427px; top:   58px; z-index: 3; }
+    .ls-plant  { width: 392px; left:  -10px; top:  107px; z-index: 2; }
+    .ls-books  { width: 383px; left:   39px; top:  505px; z-index: 1; }
+    .ls-paper  { width: 187px; left:  500px; top:  660px; z-index: 2; }
+    .ls-photo  { width: 267px; left: 1058px; top:   10px; z-index: 4; }
+    .ls-medal  { width: 235px; left: 1185px; top:  340px; z-index: 4; }
+    .ls-coffee { width: 327px; left: 1126px; top:  524px; z-index: 2; }
+
     /* ── ANIMATIONS ── */
     .reveal {
       opacity: 0;
@@ -641,6 +671,19 @@
   <a href="#work" class="mm-link">经历</a>
   <a href="#contact" class="mm-link">联系</a>
 </div>
+
+<!-- ── LANDING ── -->
+<section class="landing" id="landing">
+  <div class="landing-scene">
+    <img class="ls-pc"     src="导航页 SVG/电脑.svg"     alt="">
+    <img class="ls-plant"  src="导航页 SVG/植物.svg"     alt="">
+    <img class="ls-books"  src="导航页 SVG/书本.svg"     alt="">
+    <img class="ls-paper"  src="导航页 SVG/纸团.svg"     alt="">
+    <img class="ls-photo"  src="导航页 SVG/照片.svg"     alt="">
+    <img class="ls-medal"  src="导航页 SVG/奖牌.svg"     alt="">
+    <img class="ls-coffee" src="导航页 SVG/咖啡贝果.svg" alt="">
+  </div>
+</section>
 
 <!-- ── HERO ── -->
 <section class="hero" id="hero">
