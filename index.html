@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Li Meihan — AI Content Strategist</title>
+  <title>李美涵 — AI内容运营</title>
   <style>
     :root {
       --bg: #F5E8E4;
@@ -20,7 +20,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -33,8 +32,8 @@
         var(--grid-line) 28px
       );
       color: var(--body);
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-                   'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+                   'Microsoft YaHei', 'Helvetica Neue', Helvetica, sans-serif;
       line-height: 1.65;
       overflow-x: hidden;
     }
@@ -63,18 +62,18 @@
       align-items: baseline;
       gap: 10px;
     }
-    .nav-logo-en {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .nav-logo-zh {
+      font-size: 15px;
+      letter-spacing: 0.06em;
       color: var(--ink);
       font-weight: 600;
     }
-    .nav-logo-zh {
-      font-family: Georgia, 'Times New Roman', serif;
+    .nav-logo-sub {
+      font-family: Georgia, serif;
       font-style: italic;
-      font-size: 14px;
+      font-size: 12px;
       color: var(--muted);
+      letter-spacing: 0.04em;
     }
     .nav-links {
       list-style: none;
@@ -82,35 +81,13 @@
       gap: 36px;
     }
     .nav-links a {
-      font-size: 10.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.14em;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--ink); }
-
-    /* lang toggle */
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: none;
-      border: 1px solid var(--divider);
-      padding: 5px 11px;
-      cursor: pointer;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      transition: border-color 0.2s;
-      flex-shrink: 0;
-    }
-    .lang-toggle:hover { border-color: var(--muted); }
-    .lt-label { transition: color 0.2s; }
-    .lt-label.active { color: var(--ink); font-weight: 600; }
-    .lt-sep { color: var(--divider); }
-
     .nav-toggle {
       display: none;
       background: none;
@@ -145,7 +122,7 @@
     .mobile-menu a {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 40px;
+      font-size: 38px;
       color: var(--ink);
       text-decoration: none;
       transition: color 0.2s;
@@ -175,27 +152,26 @@
       position: relative;
     }
     .hero-label {
-      font-size: 10.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.18em;
       color: var(--muted);
       margin-bottom: 28px;
     }
     .hero-title {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(56px, 7.5vw, 92px);
+      font-size: clamp(52px, 6.5vw, 84px);
       font-style: italic;
       font-weight: 700;
-      line-height: 1.04;
+      line-height: 1.06;
       color: var(--ink);
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
       margin-bottom: 32px;
     }
     .hero-sub {
-      font-size: 16.5px;
+      font-size: 16px;
       color: var(--muted);
-      max-width: 440px;
-      line-height: 1.7;
+      max-width: 460px;
+      line-height: 1.75;
       margin-bottom: 44px;
     }
     .hero-buttons {
@@ -206,9 +182,8 @@
     .btn {
       display: inline-block;
       padding: 12px 30px;
-      font-size: 10.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       text-decoration: none;
       cursor: pointer;
       border: 1.5px solid var(--ink);
@@ -231,7 +206,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: var(--mint);
+      background: var(--rose);
     }
     .stat-row {
       padding: 22px 28px;
@@ -241,19 +216,18 @@
     .stat-num {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 28px;
+      font-size: 26px;
       color: var(--ink);
       line-height: 1;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
     }
     .stat-lbl {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
       color: var(--muted);
     }
 
-    /* hero watermark */
     .hero-wm {
       position: absolute;
       bottom: 10vh;
@@ -263,10 +237,9 @@
       color: rgba(232, 180, 176, 0.22);
       pointer-events: none;
       user-select: none;
-      letter-spacing: 0.02em;
     }
 
-    /* ── SHARED SECTION STRUCTURE ── */
+    /* ── SHARED SECTION ── */
     .section-wrap {
       max-width: 1280px;
       margin: 0 auto;
@@ -281,7 +254,6 @@
     .section-tag {
       display: flex;
       align-items: baseline;
-      gap: 0;
       margin-bottom: 64px;
     }
     .section-num-big {
@@ -294,9 +266,8 @@
       margin-right: 20px;
     }
     .section-label-text {
-      font-size: 10.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.2em;
       color: var(--muted);
       border-left: 1px solid var(--divider);
       padding-left: 20px;
@@ -306,39 +277,35 @@
     /* ── ABOUT ── */
     .about-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 80px;
       align-items: start;
     }
     .about-hl {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: clamp(24px, 2.8vw, 36px);
+      font-size: clamp(22px, 2.6vw, 34px);
       color: var(--ink);
-      line-height: 1.3;
+      line-height: 1.35;
       margin-bottom: 32px;
     }
     .about-body p {
       font-size: 15.5px;
       color: var(--body);
-      line-height: 1.8;
+      line-height: 1.85;
       margin-bottom: 18px;
     }
-    .about-right {
-      position: relative;
-      padding-top: 8px;
+    .about-right { position: relative; padding-top: 8px; }
+    .accent-card {
+      padding: 28px 24px;
+      margin-bottom: 20px;
     }
-    .accent-card-mint {
-      background: var(--mint);
-      padding: 32px 28px;
-      margin-bottom: 24px;
-    }
-    .accent-card-mint p {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .accent-card-rose { background: var(--rose-card); }
+    .accent-card p {
+      font-size: 12.5px;
+      letter-spacing: 0.1em;
       color: var(--ink);
-      line-height: 2.1;
+      line-height: 2.2;
     }
     .edu-block {
       background: var(--surface);
@@ -348,21 +315,17 @@
     .edu-label {
       font-size: 10px;
       letter-spacing: 0.2em;
-      text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 12px;
+      text-transform: uppercase;
     }
     .edu-school {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--ink);
-      line-height: 1.5;
+      line-height: 1.6;
       margin-bottom: 4px;
-    }
-    .edu-detail {
-      font-size: 12.5px;
-      color: var(--muted);
     }
     .rotated-label {
       position: absolute;
@@ -371,9 +334,78 @@
       transform: translateY(-50%) rotate(90deg);
       font-size: 9px;
       letter-spacing: 0.28em;
-      text-transform: uppercase;
       color: rgba(226, 212, 208, 0.8);
       white-space: nowrap;
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-intro {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 52px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .pf-card {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      padding: 26px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pf-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .pf-card.c-hot::before   { background: var(--rose); }
+    .pf-card.c-deep::before  { background: #B8C8D8; }
+    .pf-card.c-review::before{ background: var(--mint); }
+    .pf-card.c-pr::before    { background: #D4C8B0; }
+    .pf-card.c-book::before  { background: #C8B8D0; }
+    .pf-card.c-social::before{ background: #F0D0B8; }
+    .pf-card:hover { border-color: var(--muted); }
+    .pf-type {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .pf-title {
+      font-size: 13.5px;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .pf-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .pf-source {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .pf-metric {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--rose);
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
     /* ── WORK ── */
@@ -382,7 +414,7 @@
       display: grid;
       grid-template-columns: 52px 1fr 180px;
       gap: 36px;
-      padding: 40px 0;
+      padding: 44px 0;
       border-bottom: 1px solid var(--divider);
       align-items: start;
     }
@@ -401,26 +433,38 @@
       font-size: 21px;
       color: var(--ink);
       line-height: 1.25;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .work-co {
-      font-size: 10.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+    }
+    .work-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .work-hl-tag {
+      font-size: 11px;
+      color: var(--ink);
+      background: var(--rose-card);
+      padding: 3px 10px;
+      letter-spacing: 0.06em;
     }
     .work-desc {
       font-size: 14px;
       color: var(--body);
-      line-height: 1.75;
+      line-height: 1.8;
     }
     .work-date {
       font-size: 11.5px;
       color: var(--muted);
       text-align: right;
       padding-top: 3px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     /* ── EXPERTISE ── */
@@ -431,28 +475,27 @@
     }
     .exp-card {
       padding: 36px 28px 40px;
-      position: relative;
     }
     .exp-card-num {
       font-family: Georgia, serif;
       font-style: italic;
       font-size: 12px;
-      color: rgba(28, 22, 20, 0.35);
-      margin-bottom: 28px;
+      color: rgba(28, 22, 20, 0.3);
+      margin-bottom: 24px;
       letter-spacing: 0.08em;
     }
     .exp-card-title {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 22px;
+      font-size: 21px;
       color: var(--ink);
       line-height: 1.3;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .exp-card-body {
       font-size: 13.5px;
       color: var(--body);
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
     /* ── CONTACT ── */
@@ -465,9 +508,9 @@
     .contact-hl {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: clamp(38px, 5vw, 58px);
+      font-size: clamp(36px, 4.5vw, 54px);
       color: var(--ink);
-      line-height: 1.15;
+      line-height: 1.2;
       letter-spacing: -0.02em;
     }
     .contact-right {
@@ -476,17 +519,16 @@
       gap: 28px;
     }
     .contact-body {
-      font-size: 16px;
+      font-size: 15.5px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.75;
     }
     .contact-link {
       display: inline-block;
-      padding: 14px 32px;
+      padding: 13px 30px;
       border: 1.5px solid var(--ink);
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
       text-decoration: none;
       color: var(--ink);
       align-self: flex-start;
@@ -510,12 +552,10 @@
       font-family: 'Brush Script MT', 'Segoe Script', cursive;
       font-size: 26px;
       color: var(--rose);
-      letter-spacing: 0.04em;
     }
     .footer-meta {
       font-size: 10.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      letter-spacing: 0.15em;
       color: var(--muted);
     }
 
@@ -546,7 +586,7 @@
         padding-top: 120px;
         padding-bottom: 64px;
       }
-      .hero-title { font-size: 52px; }
+      .hero-title { font-size: 50px; }
       .hero-wm { font-size: 56px; bottom: 16px; right: 28px; }
 
       .section-wrap { padding: 72px 28px; }
@@ -554,6 +594,8 @@
 
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .rotated-label { display: none; }
+
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
 
       .work-item { grid-template-columns: 44px 1fr; gap: 16px; }
       .work-date { display: none; }
@@ -565,9 +607,10 @@
       footer { padding: 28px; }
     }
 
-    @media (max-width: 480px) {
-      .hero-title { font-size: 42px; }
+    @media (max-width: 520px) {
+      .hero-title { font-size: 40px; }
       .hero-sub { font-size: 15px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -576,21 +619,16 @@
 <!-- ── NAV ── -->
 <nav id="main-nav">
   <a href="#" class="nav-logo">
-    <span class="nav-logo-en">Li Meihan</span>
     <span class="nav-logo-zh">李美涵</span>
+    <span class="nav-logo-sub">AI内容运营</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#about" data-t="nav-about">About</a></li>
-    <li><a href="#work" data-t="nav-work">Work</a></li>
-    <li><a href="#expertise" data-t="nav-expertise">Expertise</a></li>
-    <li><a href="#contact" data-t="nav-contact">Contact</a></li>
+    <li><a href="#about">关于</a></li>
+    <li><a href="#portfolio">作品</a></li>
+    <li><a href="#work">经历</a></li>
+    <li><a href="#contact">联系</a></li>
   </ul>
-  <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
-    <span class="lt-label active" data-lang="en">EN</span>
-    <span class="lt-sep">·</span>
-    <span class="lt-label" data-lang="zh">中</span>
-  </button>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+  <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -598,159 +636,251 @@
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobile-menu">
   <button class="mobile-close" id="mobile-close">✕</button>
-  <a href="#about" class="mm-link" data-t="nav-about">About</a>
-  <a href="#work" class="mm-link" data-t="nav-work">Work</a>
-  <a href="#expertise" class="mm-link" data-t="nav-expertise">Expertise</a>
-  <a href="#contact" class="mm-link" data-t="nav-contact">Contact</a>
+  <a href="#about" class="mm-link">关于</a>
+  <a href="#portfolio" class="mm-link">作品</a>
+  <a href="#work" class="mm-link">经历</a>
+  <a href="#contact" class="mm-link">联系</a>
 </div>
 
 <!-- ── HERO ── -->
 <section class="hero" id="hero">
   <div class="hero-left">
-    <p class="hero-label reveal" data-t="hero-label">AI Content &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Translation</p>
-    <h1 class="hero-title reveal d1" data-t="hero-title">Bridging<br>AI &amp;<br>Human<br>Stories</h1>
-    <p class="hero-sub reveal d2" data-t="hero-sub">Content strategist with 3 years deep in LLMs, AI Agents, and enterprise AI — now moving toward product strategy.</p>
+    <p class="hero-label reveal">AI内容运营 · 技术品牌公关 · 北京</p>
+    <h1 class="hero-title reveal d1">追AI前沿，<br>也追<br>十万读者</h1>
+    <p class="hero-sub reveal d2">三年聚焦大模型与企业AI，内容月均阅读1w+，多篇10w+爆款；策划统筹300人技术峰会，NPS 77.32%。现寻求内容运营 · 技术品牌公关方向机会。</p>
     <div class="hero-buttons reveal d3">
-      <a href="#work" class="btn btn-light" data-t="hero-btn-work">View Work</a>
-      <a href="#contact" class="btn btn-dark" data-t="hero-btn-contact">Get in Touch</a>
+      <a href="#portfolio" class="btn btn-light">查看作品</a>
+      <a href="#contact" class="btn btn-dark">联系我</a>
     </div>
   </div>
   <div class="hero-stats reveal d2">
     <div class="stat-row">
-      <div class="stat-num">10万+</div>
-      <div class="stat-lbl" data-t="stat-lbl-1">Peak Article Views</div>
+      <div class="stat-num">10w+</div>
+      <div class="stat-lbl">单篇最高阅读（51CTO）</div>
     </div>
     <div class="stat-row">
-      <div class="stat-num">300,000+</div>
-      <div class="stat-lbl" data-t="stat-lbl-2">Peak Live Viewers</div>
+      <div class="stat-num">30万+</div>
+      <div class="stat-lbl">直播峰值观看（引领者大会）</div>
     </div>
     <div class="stat-row">
-      <div class="stat-num">50+</div>
-      <div class="stat-lbl" data-t="stat-lbl-3">Monthly Sales Leads</div>
+      <div class="stat-num">6w+</div>
+      <div class="stat-lbl">小红书单篇阅读 · 5k+获赞</div>
     </div>
     <div class="stat-row">
-      <div class="stat-num">3 yrs</div>
-      <div class="stat-lbl" data-t="stat-lbl-4">AI Industry Focus</div>
+      <div class="stat-num">NPS 77.32%</div>
+      <div class="stat-lbl">技术峰会参会者满意度</div>
     </div>
   </div>
   <div class="hero-wm">李美涵</div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ── 01 关于 ── -->
 <div class="section-wrap" id="about">
   <div class="section-rule"></div>
   <div class="section-tag reveal">
     <span class="section-num-big">01</span>
-    <span class="section-label-text" data-t="sec-about">About</span>
+    <span class="section-label-text">关于</span>
   </div>
   <div class="about-grid">
     <div class="about-body reveal">
-      <h2 class="about-hl" data-t="about-hl">Where technical depth<br>meets narrative clarity</h2>
-      <p data-t="about-p1">I write about AI the way engineers think about it — with precision, curiosity, and an eye for what actually matters. Three years tracking LLMs from GPT-3 to DeepSeek, from research papers to enterprise deployments.</p>
-      <p data-t="about-p2">My background spans digital media, advertising strategy, and live tech event production. Fluent in both Mandarin and English, I move between Chinese AI ecosystem reporting and global product thinking without losing nuance.</p>
-      <p data-t="about-p3">I'm currently seeking roles in AI product strategy, product operations, or technical content leadership — anywhere I can use deep AI understanding to shape what gets built and how it gets communicated.</p>
+      <h2 class="about-hl">从大模型论文到十万爆款，<br>中间那段路<br>就是我做的事</h2>
+      <p>三年来，我围绕大模型、AI Agent 与企业AI应用持续输出内容。在51CTO做技术编辑时，每月产出10-15篇头条文章，平均阅读1w+，多篇10w+爆款；去做内容运营时，策划统筹了一场200+律所合伙人参与、30万+线上观看的行业峰会。这两件事，我都干过。</p>
+      <p>我不只追热点。拆解大模型原理、测评最新AI产品、给企业客户写品牌PR稿、做技术白皮书——这些都有实际交付。小红书单篇ChatGPT Prompt内容阅读6w+、获赞5k+，证明我也能把技术话题写给普通人看懂。</p>
+      <p>目前正在寻找内容运营或技术品牌公关方向的全职岗位，希望在真正做AI的公司，把内容变成有实际价值的东西。</p>
     </div>
     <div class="about-right reveal d1">
-      <div class="accent-card-mint">
-        <p data-t="about-card">CET-6 English<br>Mandarin Native<br>3 yrs AI Focus<br>Beijing-based</p>
+      <div class="accent-card accent-card-rose">
+        <p>AI行业专注　3年<br>内容方向　B端 · C端<br>城市　北京<br>求职意向　内容运营 / 品牌公关</p>
       </div>
       <div class="edu-block">
-        <div class="edu-label" data-t="edu-label">Education</div>
-        <div class="edu-school" data-t="edu-school-1">Tianjin Foreign Studies University<br>M.A. Advertising · GPA 3.82</div>
-        <div class="edu-detail" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
-          <div class="edu-school" data-t="edu-school-2">Shandong Normal University</div>
-          <div style="font-size:12px; color:var(--muted);" data-t="edu-degree-2">B.A. Digital Media Art</div>
+        <div class="edu-label">教育背景</div>
+        <div class="edu-school">天津外国语大学<br>广告学硕士 · GPA 3.82 · 一等奖学金</div>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
+          <div class="edu-school">山东师范大学</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:2px;">数字媒体艺术学士 · 金犊奖优秀奖</div>
         </div>
       </div>
-      <div class="rotated-label" data-t="rotated-label">AI · Content · Strategy · Translation</div>
+      <div class="rotated-label">AI · 内容 · 传播 · 策划</div>
     </div>
   </div>
 </div>
 
-<!-- ── WORK ── -->
-<div class="section-wrap" id="work">
+<!-- ── 02 代表作品 ── -->
+<div class="section-wrap" id="portfolio">
   <div class="section-rule"></div>
   <div class="section-tag reveal">
     <span class="section-num-big">02</span>
-    <span class="section-label-text" data-t="sec-work">Work</span>
+    <span class="section-label-text">代表作品</span>
   </div>
-  <ul class="work-list">
-    <li class="work-item reveal">
-      <span class="work-idx">01.</span>
-      <div>
-        <div class="work-title" data-t="work-title-1">B2B Content Operations</div>
-        <div class="work-co" data-t="work-co-1">Alpha AI &nbsp;·&nbsp; AlphaGPT Legal</div>
-        <p class="work-desc" data-t="work-desc-1">Managed brand content for AlphaGPT, a legal-domain AI product. Case studies consistently exceeded 10,000 views; generated 50+ monthly sales leads. Coordinated a legal industry leaders summit — 200+ law firm partners, 300,000+ online viewers. Post-event PR coverage in major AI media outlets.</p>
+  <p class="portfolio-intro reveal">覆盖热点爆文、行业深度、产品测评、客户PR稿与技术白皮书，展示在不同场景下的内容交付能力。</p>
+  <div class="portfolio-grid">
+
+    <a class="pf-card c-hot reveal" href="https://mp.weixin.qq.com/s/6GjFFUG4B-QWMvbLpBbJDg" target="_blank" rel="noopener">
+      <div class="pf-type">热点爆文 · 51CTO</div>
+      <div class="pf-title">《突发！TikTok或1月19日美国全面下架，曝苹果和谷歌已接到官方通知》</div>
+      <div class="pf-meta">
+        <span class="pf-source">51CTO · 头条</span>
+        <span class="pf-metric">10w+</span>
       </div>
-      <div class="work-date" data-t="work-date-1">Nov 2025<br>Mar 2026</div>
-    </li>
-    <li class="work-item reveal d1">
-      <span class="work-idx">02.</span>
-      <div>
-        <div class="work-title" data-t="work-title-2">AI Technical Editor</div>
-        <div class="work-co" data-t="work-co-2">51CTO</div>
-        <p class="work-desc" data-t="work-desc-2">Covered the LLM landscape — OpenAI, Meta, DeepSeek, and frontier labs. Multiple articles exceeded 10,000 views; several reached 100,000+. Authored in-depth DeepSeek R1 product analysis. Built and produced an end-to-end tech short video series from concept to final cut.</p>
+    </a>
+
+    <a class="pf-card c-deep reveal d1" href="https://mp.weixin.qq.com/s/yYsrfZyz-oHgKK7mkzz0lQ" target="_blank" rel="noopener">
+      <div class="pf-type">行业深度 · 51CTO</div>
+      <div class="pf-title">《年中复盘：大模型六小虎生存现状盘点》——文末率先预判IPO为AI公司另一选择</div>
+      <div class="pf-meta">
+        <span class="pf-source">51CTO · 深度</span>
+        <span class="pf-metric">行业影响</span>
       </div>
-      <div class="work-date" data-t="work-date-2">Feb 2024<br>Sep 2025</div>
-    </li>
-    <li class="work-item reveal d2">
-      <span class="work-idx">03.</span>
-      <div>
-        <div class="work-title" data-t="work-title-3">Conference Editor</div>
-        <div class="work-co" data-t="work-co-3">LiveVideoStack</div>
-        <p class="work-desc" data-t="work-desc-3">Led the AIGC &amp; Audio-Video Future interview series with AI leads from Netease Cloud Music, TeSight, and Lizhi. Coordinated a 300-person tech conference across 13 tracks with 70+ speakers from ByteDance, Tencent Cloud, Alibaba Cloud, and Kuaishou. Conference NPS: 77.32.</p>
+    </a>
+
+    <a class="pf-card c-review reveal d2" href="https://mp.weixin.qq.com/s/S7gZQAL_Yn-QXf-i7Hpc4A" target="_blank" rel="noopener">
+      <div class="pf-type">产品测评 · 51CTO</div>
+      <div class="pf-title">《腾讯文档也能用上DeepSeek R1满血版！实测：丝滑生成哪吒3预测PPT》</div>
+      <div class="pf-meta">
+        <span class="pf-source">51CTO · 测评</span>
+        <span class="pf-metric">DeepSeek R1</span>
       </div>
-      <div class="work-date" data-t="work-date-3">Jun 2023<br>Jan 2024</div>
-    </li>
-    <li class="work-item reveal d3">
-      <span class="work-idx">04.</span>
-      <div>
-        <div class="work-title" data-t="work-title-4">Content Operations Intern</div>
-        <div class="work-co" data-t="work-co-4">Analysys (易观)</div>
-        <p class="work-desc" data-t="work-desc-4">B2B content and whitepaper production. Co-produced the "DTC Brand Private Domain User Operations Manual" — 2,000+ downloads in the first month. Followed up on 228 inbound leads with 5 direct conversions. Grew WeChat Official Account by 5,000+ followers.</p>
+    </a>
+
+    <a class="pf-card c-pr reveal" href="https://mp.weixin.qq.com/s/52isJW4sh4rmtk-_UcD9rw" target="_blank" rel="noopener">
+      <div class="pf-type">客户 PR 稿 · Alpha AI</div>
+      <div class="pf-title">《用AI讲好15分钟的"长"故事，爱奇艺又一次选了难而正确的路》</div>
+      <div class="pf-meta">
+        <span class="pf-source">爱奇艺 · 品牌</span>
+        <span class="pf-metric">B端公关</span>
       </div>
-      <div class="work-date" data-t="work-date-4">Jul 2021<br>Dec 2021</div>
-    </li>
-  </ul>
+    </a>
+
+    <a class="pf-card c-book reveal d1" href="https://mp.weixin.qq.com/s/9gfSx_6KHEFLXlshO-vwuw" target="_blank" rel="noopener">
+      <div class="pf-type">客户 PR 稿 · Alpha AI</div>
+      <div class="pf-title">《AGI的这个致命缺陷，一家光伏龙头正在寻找解决答案》</div>
+      <div class="pf-meta">
+        <span class="pf-source">阳光电源 · 品牌</span>
+        <span class="pf-metric">跨行业AI</span>
+      </div>
+    </a>
+
+    <div class="pf-card c-social reveal d2" style="cursor:default;">
+      <div class="pf-type">社媒内容 · 小红书</div>
+      <div class="pf-title">ChatGPT Prompt 使用经验分享，聚焦实用场景与提示词技巧</div>
+      <div class="pf-meta">
+        <span class="pf-source">小红书 · 个人号</span>
+        <span class="pf-metric">6w+ 阅读</span>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<!-- ── EXPERTISE ── -->
-<div class="section-wrap" id="expertise">
+<!-- ── 03 工作经历 ── -->
+<div class="section-wrap" id="work">
   <div class="section-rule"></div>
   <div class="section-tag reveal">
     <span class="section-num-big">03</span>
-    <span class="section-label-text" data-t="sec-expertise">Expertise</span>
+    <span class="section-label-text">工作经历</span>
+  </div>
+  <ul class="work-list">
+
+    <li class="work-item reveal">
+      <span class="work-idx">01.</span>
+      <div>
+        <div class="work-title">B端内容运营</div>
+        <div class="work-co">北京新橙科技 · Alpha AI · AlphaGPT法律AI</div>
+        <div class="work-highlights">
+          <span class="work-hl-tag">30万+ 直播观看</span>
+          <span class="work-hl-tag">GEO稿被主流AI收录</span>
+          <span class="work-hl-tag">月均50+销售线索</span>
+        </div>
+        <p class="work-desc">负责法律AI产品AlphaGPT的品牌内容运营，面向律所管理层做AI应用教育与案例策划，大律所客户案例曝光过万，多渠道内容矩阵为销售侧月均沉淀50+泛线索。统筹法律行业引领者大会部分内容与前期工作——200+律所主任/合伙人到场，30万+线上观看，会后GEO稿件被多家主流AI搜索引擎收录，是较早将内容策略延伸到生成式引擎优化（GEO）场景的实践。</p>
+      </div>
+      <div class="work-date">2025.11<br>2026.03</div>
+    </li>
+
+    <li class="work-item reveal d1">
+      <span class="work-idx">02.</span>
+      <div>
+        <div class="work-title">AI方向技术编辑</div>
+        <div class="work-co">51CTO · 北京无忧创想信息科技</div>
+        <div class="work-highlights">
+          <span class="work-hl-tag">多篇10w+爆款</span>
+          <span class="work-hl-tag">月均10-15篇 · 平均1w+阅读</span>
+          <span class="work-hl-tag">短视频全链路独立完成</span>
+        </div>
+        <p class="work-desc">深度追踪大模型领域——OpenAI、Meta、大模型六小虎、DeepSeek等，撰写热点文章与深度报道；核心能力是选题嗅觉，能在TikTok禁令、FBI破解手机、程序员失业等热点中找到科技媒体的独特切入角，多篇10w+爆款印证这一判断力；同时承担AI产品测评与DeepSeek R1深度解析，以及从选题到成片的科技短视频全链路制作。</p>
+      </div>
+      <div class="work-date">2024.02<br>2025.09</div>
+    </li>
+
+    <li class="work-item reveal d2">
+      <span class="work-idx">03.</span>
+      <div>
+        <div class="work-title">大会主编</div>
+        <div class="work-co">LiveVideoStack · 北京石策木蔼科技</div>
+        <div class="work-highlights">
+          <span class="work-hl-tag">NPS 77.32%</span>
+          <span class="work-hl-tag">300人峰会 · 13个技术专场</span>
+          <span class="work-hl-tag">70+讲师统筹</span>
+        </div>
+        <p class="work-desc">统筹音视频技术大会全部内容，把控主会场及13个技术专场共50+演讲，协调火山引擎、腾讯云音视频、阿里云、快手等企业技术专家与高校教授；大会参会者NPS 77.32%。同期策划"AIGC与音视频未来"专题采访，采访网易云商、特看科技、荔枝等企业AI技术负责人，探讨AIGC在媒体、教育、电商多赛道的应用与前景。</p>
+      </div>
+      <div class="work-date">2023.06<br>2024.01</div>
+    </li>
+
+    <li class="work-item reveal d3">
+      <span class="work-idx">04.</span>
+      <div>
+        <div class="work-title">内容运营（实习）</div>
+        <div class="work-co">北京易观数字科技 · 易观分析</div>
+        <div class="work-highlights">
+          <span class="work-hl-tag">白皮书月下载2k+</span>
+          <span class="work-hl-tag">跟进228条线索 · 转化5笔</span>
+          <span class="work-hl-tag">涨粉5000+</span>
+        </div>
+        <p class="work-desc">负责"易观方舟"公众号与知乎号运营，输出专业文章20余篇，涨粉5000+；编辑排版并推广B2B白皮书《DTC品牌私域用户运营手册》，月内下载量超2k，跟进有效线索228条，成功转化订单5笔。</p>
+      </div>
+      <div class="work-date">2021.07<br>2021.12</div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- ── 04 核心能力 ── -->
+<div class="section-wrap" id="expertise">
+  <div class="section-rule"></div>
+  <div class="section-tag reveal">
+    <span class="section-num-big">04</span>
+    <span class="section-label-text">核心能力</span>
   </div>
   <div class="expertise-grid">
     <div class="exp-card reveal" style="background: var(--mint);">
       <div class="exp-card-num">01 —</div>
-      <h3 class="exp-card-title" data-t="exp-title-1">AI Industry Intelligence</h3>
-      <p class="exp-card-body" data-t="exp-body-1">Deep familiarity with the LLM landscape — model capabilities, enterprise adoption patterns, competitive dynamics. I follow the research so you don't have to.</p>
+      <h3 class="exp-card-title">热点洞察<br>· 爆款生产</h3>
+      <p class="exp-card-body">每月追踪大模型与科技热点，拆解选题逻辑，在截稿压力下快速产出高传播量内容。TikTok禁令、DeepSeek冲击、程序员失业……懂得在热点中找到科技媒体的独特切入角，多篇10w+爆款为证。</p>
     </div>
     <div class="exp-card reveal d1" style="background: var(--rose-card);">
       <div class="exp-card-num">02 —</div>
-      <h3 class="exp-card-title" data-t="exp-title-2">Technical Content Strategy</h3>
-      <p class="exp-card-body" data-t="exp-body-2">From prompt engineering explainers to enterprise AI case studies, I translate complex concepts into narratives that move decision-makers and developers alike.</p>
+      <h3 class="exp-card-title">B端品牌<br>· 活动统筹</h3>
+      <p class="exp-card-body">从品牌物料、客户PR稿到白皮书，懂得围绕产品价值搭建内容矩阵；同时具备大型技术峰会全流程统筹经验——选题立项、讲师沟通、现场执行，NPS 77.32%的口碑是结果。</p>
     </div>
     <div class="exp-card reveal d2" style="background: var(--cream);">
       <div class="exp-card-num">03 —</div>
-      <h3 class="exp-card-title" data-t="exp-title-3">Bilingual Bridge</h3>
-      <p class="exp-card-body" data-t="exp-body-3">Native Mandarin + CET-6 English. Equally comfortable with arXiv papers and Baidu World coverage. The Chinese AI ecosystem is often a black box — I make it readable.</p>
+      <h3 class="exp-card-title">深度内容<br>· 全形态交付</h3>
+      <p class="exp-card-body">行业观察、产品测评、人物访谈、技术白皮书、短视频脚本——不同形态都有实际交付。DeepSeek入门宝典（技术解析+开发实战）、爱奇艺AI品牌稿、阳光电源跨行业AI报道，客户覆盖能源、娱乐、法律多个行业。</p>
     </div>
   </div>
 </div>
 
-<!-- ── CONTACT ── -->
+<!-- ── 05 联系 ── -->
 <div class="section-wrap" id="contact">
   <div class="section-rule"></div>
   <div class="section-tag reveal">
-    <span class="section-num-big">04</span>
-    <span class="section-label-text" data-t="sec-contact">Contact</span>
+    <span class="section-num-big">05</span>
+    <span class="section-label-text">联系</span>
   </div>
   <div class="contact-inner">
-    <h2 class="contact-hl reveal" data-t="contact-hl">Let's build<br>something<br>intelligent.</h2>
+    <h2 class="contact-hl reveal">一起做<br>真正有用的<br>AI内容。</h2>
     <div class="contact-right reveal d1">
-      <p class="contact-body" data-t="contact-body">Open to AI product strategy roles, content leadership, and consulting projects. Beijing-based, globally curious.</p>
+      <p class="contact-body">开放内容运营、技术品牌公关及相关咨询合作。北京 · 可异地。期待和真正在做AI的团队聊聊。</p>
       <a href="mailto:limeihan.y@gmail.com" class="contact-link">limeihan.y@gmail.com</a>
     </div>
   </div>
@@ -759,145 +889,15 @@
 <!-- ── FOOTER ── -->
 <footer>
   <span class="footer-sig">李美涵</span>
-  <span class="footer-meta" data-t="footer-meta">Beijing &nbsp;·&nbsp; 2026</span>
+  <span class="footer-meta">北京 · 2026</span>
 </footer>
 
 <script>
-  const T = {
-    en: {
-      'nav-about': 'About',
-      'nav-work': 'Work',
-      'nav-expertise': 'Expertise',
-      'nav-contact': 'Contact',
-      'hero-label': 'AI Content &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Translation',
-      'hero-title': 'Bridging<br>AI &amp;<br>Human<br>Stories',
-      'hero-sub': 'Content strategist with 3 years deep in LLMs, AI Agents, and enterprise AI — now moving toward product strategy.',
-      'hero-btn-work': 'View Work',
-      'hero-btn-contact': 'Get in Touch',
-      'stat-lbl-1': 'Peak Article Views',
-      'stat-lbl-2': 'Peak Live Viewers',
-      'stat-lbl-3': 'Monthly Sales Leads',
-      'stat-lbl-4': 'AI Industry Focus',
-      'sec-about': 'About',
-      'sec-work': 'Work',
-      'sec-expertise': 'Expertise',
-      'sec-contact': 'Contact',
-      'about-hl': 'Where technical depth<br>meets narrative clarity',
-      'about-p1': 'I write about AI the way engineers think about it — with precision, curiosity, and an eye for what actually matters. Three years tracking LLMs from GPT-3 to DeepSeek, from research papers to enterprise deployments.',
-      'about-p2': 'My background spans digital media, advertising strategy, and live tech event production. Fluent in both Mandarin and English, I move between Chinese AI ecosystem reporting and global product thinking without losing nuance.',
-      'about-p3': "I'm currently seeking roles in AI product strategy, product operations, or technical content leadership — anywhere I can use deep AI understanding to shape what gets built and how it gets communicated.",
-      'about-card': 'CET-6 English<br>Mandarin Native<br>3 yrs AI Focus<br>Beijing-based',
-      'edu-label': 'Education',
-      'edu-school-1': 'Tianjin Foreign Studies University<br>M.A. Advertising · GPA 3.82',
-      'edu-school-2': 'Shandong Normal University',
-      'edu-degree-2': 'B.A. Digital Media Art',
-      'rotated-label': 'AI · Content · Strategy · Translation',
-      'work-title-1': 'B2B Content Operations',
-      'work-co-1': 'Alpha AI &nbsp;·&nbsp; AlphaGPT Legal',
-      'work-desc-1': 'Managed brand content for AlphaGPT, a legal-domain AI product. Case studies consistently exceeded 10,000 views; generated 50+ monthly sales leads. Coordinated a legal industry leaders summit — 200+ law firm partners, 300,000+ online viewers. Post-event PR coverage in major AI media outlets.',
-      'work-date-1': 'Nov 2025<br>Mar 2026',
-      'work-title-2': 'AI Technical Editor',
-      'work-co-2': '51CTO',
-      'work-desc-2': 'Covered the LLM landscape — OpenAI, Meta, DeepSeek, and frontier labs. Multiple articles exceeded 10,000 views; several reached 100,000+. Authored in-depth DeepSeek R1 product analysis. Built and produced an end-to-end tech short video series from concept to final cut.',
-      'work-date-2': 'Feb 2024<br>Sep 2025',
-      'work-title-3': 'Conference Editor',
-      'work-co-3': 'LiveVideoStack',
-      'work-desc-3': 'Led the AIGC &amp; Audio-Video Future interview series with AI leads from Netease Cloud Music, TeSight, and Lizhi. Coordinated a 300-person tech conference across 13 tracks with 70+ speakers from ByteDance, Tencent Cloud, Alibaba Cloud, and Kuaishou. Conference NPS: 77.32.',
-      'work-date-3': 'Jun 2023<br>Jan 2024',
-      'work-title-4': 'Content Operations Intern',
-      'work-co-4': 'Analysys (易观)',
-      'work-desc-4': 'B2B content and whitepaper production. Co-produced the "DTC Brand Private Domain User Operations Manual" — 2,000+ downloads in the first month. Followed up on 228 inbound leads with 5 direct conversions. Grew WeChat Official Account by 5,000+ followers.',
-      'work-date-4': 'Jul 2021<br>Dec 2021',
-      'exp-title-1': 'AI Industry Intelligence',
-      'exp-body-1': "Deep familiarity with the LLM landscape — model capabilities, enterprise adoption patterns, competitive dynamics. I follow the research so you don't have to.",
-      'exp-title-2': 'Technical Content Strategy',
-      'exp-body-2': 'From prompt engineering explainers to enterprise AI case studies, I translate complex concepts into narratives that move decision-makers and developers alike.',
-      'exp-title-3': 'Bilingual Bridge',
-      'exp-body-3': 'Native Mandarin + CET-6 English. Equally comfortable with arXiv papers and Baidu World coverage. The Chinese AI ecosystem is often a black box — I make it readable.',
-      'contact-hl': "Let's build<br>something<br>intelligent.",
-      'contact-body': 'Open to AI product strategy roles, content leadership, and consulting projects. Beijing-based, globally curious.',
-      'footer-meta': 'Beijing &nbsp;·&nbsp; 2026',
-    },
-    zh: {
-      'nav-about': '关于',
-      'nav-work': '经历',
-      'nav-expertise': '专长',
-      'nav-contact': '联系',
-      'hero-label': 'AI内容 &nbsp;·&nbsp; 策略 &nbsp;·&nbsp; 翻译',
-      'hero-title': '让AI，<br>讲好<br>人的<br>故事',
-      'hero-sub': '3年深耕大模型、AI Agent与企业级AI的内容策略师 — 正迈向AI产品策略方向。',
-      'hero-btn-work': '查看经历',
-      'hero-btn-contact': '联系我',
-      'stat-lbl-1': '单篇最高阅读量',
-      'stat-lbl-2': '直播峰值观看量',
-      'stat-lbl-3': '月均销售线索',
-      'stat-lbl-4': 'AI行业专注',
-      'sec-about': '关于',
-      'sec-work': '经历',
-      'sec-expertise': '专长',
-      'sec-contact': '联系',
-      'about-hl': '技术深度<br>与叙事清晰的交汇',
-      'about-p1': '我写AI的方式，和工程师思考的方式一样 — 精准、好奇，关注真正重要的事。三年来从GPT-3到DeepSeek，从研究论文到企业落地，全程深度跟踪。',
-      'about-p2': '我的背景跨越数字媒体、广告策略和技术会议制作。中英双语，在中国AI生态报道与全球产品思维之间自如切换，不失细节与层次。',
-      'about-p3': '目前正在寻找AI产品策略、产品运营或技术内容领导力方向的职位 — 任何能将我的AI深度理解转化为产品塑造与传播价值的角色。',
-      'about-card': '英语 CET-6<br>普通话母语<br>3年AI专注<br>北京',
-      'edu-label': '教育背景',
-      'edu-school-1': '天津外国语大学<br>广告学硕士 · GPA 3.82',
-      'edu-school-2': '山东师范大学',
-      'edu-degree-2': '数字媒体艺术学士',
-      'rotated-label': 'AI · 内容 · 策略 · 翻译',
-      'work-title-1': 'B2B内容运营',
-      'work-co-1': 'Alpha AI &nbsp;·&nbsp; AlphaGPT法律AI',
-      'work-desc-1': '负责AlphaGPT法律AI产品的品牌内容运营。案例文章阅读量持续超万次，月均带来50+销售线索。策划执行法律行业领袖峰会 — 现场200+律所合伙人，线上观看量30万+。峰会后期PR报道覆盖主要AI媒体平台。',
-      'work-date-1': '2025年11月<br>2026年3月',
-      'work-title-2': 'AI技术编辑',
-      'work-co-2': '51CTO',
-      'work-desc-2': '深度报道大模型领域 — OpenAI、Meta、DeepSeek及前沿实验室。多篇文章阅读量破万，数篇达10万+。撰写DeepSeek R1深度产品分析。从概念到成片，独立制作完成一整套科技短视频系列。',
-      'work-date-2': '2024年2月<br>2025年9月',
-      'work-title-3': '会议编辑',
-      'work-co-3': 'LiveVideoStack',
-      'work-desc-3': '主导AIGC与音视频未来系列专访，对话网易云音乐、TeSight、荔枝等AI负责人。统筹300人技术大会，共13个专题分论坛，70+位来自字节跳动、腾讯云、阿里云、快手的演讲嘉宾。大会NPS：77.32。',
-      'work-date-3': '2023年6月<br>2024年1月',
-      'work-title-4': '内容运营实习生',
-      'work-co-4': '易观分析',
-      'work-desc-4': 'B2B内容与白皮书生产。联合出品《DTC品牌私域用户运营手册》— 首月下载量2000+。跟进228条线索，完成5单直接转化。微信公众号涨粉5000+。',
-      'work-date-4': '2021年7月<br>2021年12月',
-      'exp-title-1': 'AI行业洞察',
-      'exp-body-1': '对大模型格局了如指掌 — 模型能力、企业采购路径、竞争动态。前沿研究，我替你追。',
-      'exp-title-2': '技术内容策略',
-      'exp-body-2': '从提示工程科普到企业AI案例研究，我将复杂概念转化为能打动决策者与开发者的叙事。',
-      'exp-title-3': '双语桥梁',
-      'exp-body-3': '普通话母语 + CET-6英语。arXiv论文和百度世界大会报道同样驾轻就熟。中国AI生态对外是个黑盒 — 我让它变得可读。',
-      'contact-hl': '一起构建<br>有智识的<br>未来。',
-      'contact-body': '欢迎洽谈AI产品策略职位、内容领导力或咨询合作。北京 · 面向全球。',
-      'footer-meta': '北京 &nbsp;·&nbsp; 2026',
-    }
-  };
-
-  let currentLang = localStorage.getItem('site-lang') || 'en';
-
-  function applyLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('site-lang', lang);
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-    document.title = lang === 'zh' ? '李美涵 — AI内容策略师' : 'Li Meihan — AI Content Strategist';
-    const t = T[lang];
-    document.querySelectorAll('[data-t]').forEach(el => {
-      const key = el.dataset.t;
-      if (t[key] !== undefined) el.innerHTML = t[key];
-    });
-    document.querySelectorAll('.lt-label').forEach(span => {
-      span.classList.toggle('active', span.dataset.lang === lang);
-    });
-  }
-
-  // Nav scroll
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
-  // Mobile menu
   const toggle = document.getElementById('nav-toggle');
   const menu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('mobile-close');
@@ -907,27 +907,16 @@
     a.addEventListener('click', () => menu.classList.remove('open'));
   });
 
-  // Lang toggle
-  document.getElementById('lang-toggle').addEventListener('click', () => {
-    applyLang(currentLang === 'en' ? 'zh' : 'en');
-  });
-
-  // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Hero entrance
   requestAnimationFrame(() => {
     document.querySelectorAll('#hero .reveal').forEach(el => {
       setTimeout(() => el.classList.add('in'), 80);
     });
   });
-
-  // Apply saved/default language
-  applyLang(currentLang);
 </script>
-
 </body>
 </html>
