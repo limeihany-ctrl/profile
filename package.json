@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "screenshot": "node screenshot.js"
+  },
+  "dependencies": {
+    "puppeteer": "^25.0.4"
   }
 }

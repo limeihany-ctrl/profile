@@ -67,20 +67,33 @@
     .nav-logo {
       text-decoration: none;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 10px;
     }
-    .nav-logo-zh {
+    .nav-logo-text {
       font-size: 15px;
+      font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--ink);
-      font-weight: 600;
     }
-    .nav-logo-sub {
+    .hero-badge {
+      position: absolute;
+      top: 28px;
+      left: 56px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-badge-icon {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+    .hero-badge-label {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 15px;
+      color: var(--ink);
       letter-spacing: 0.04em;
     }
     .nav-links {
@@ -151,11 +164,7 @@
     .hero {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 120px 56px 100px;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 64px;
-      align-items: start;
+      padding: 100px 56px 100px;
       position: relative;
     }
     .hero-label {
@@ -174,6 +183,13 @@
       letter-spacing: -0.02em;
       margin-bottom: 32px;
     }
+    .hero-content {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      min-height: 480px;
+    }
     .hero-bio {
       margin-bottom: 40px;
     }
@@ -182,13 +198,37 @@
       color: var(--body);
       line-height: 1.85;
       margin-bottom: 16px;
-      max-width: 500px;
     }
     .hero-bio p:last-child { margin-bottom: 0; }
     .hero-buttons {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+    }
+    .hero-left {
+      position: relative;
+      z-index: 1;
+      padding-right: 24px;
+      transform: translateY(-180px);
+    }
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      padding-left: 150px;
+      transform: translateY(-210px);
+    }
+    .hero-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-figure {
+      height: 600px;
+      width: auto;
+      display: block;
     }
     .btn {
       display: inline-block;
@@ -668,8 +708,7 @@
 <!-- ── NAV ── -->
 <nav id="main-nav">
   <a href="#" class="nav-logo">
-    <span class="nav-logo-zh">李美涵</span>
-    <span class="nav-logo-sub">AI内容运营</span>
+    <span class="nav-logo-text">Li MeiHan</span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">关于</a></li>
@@ -706,52 +745,31 @@
 
 <!-- ── HERO + ABOUT ── -->
 <section class="hero" id="about">
-  <div class="hero-left">
-    <p class="hero-label reveal">AI内容运营 · 技术品牌公关 · 北京</p>
-    <h1 class="hero-title reveal d1">追AI前沿，<br>也追<br>十万读者</h1>
-    <div class="hero-bio reveal d2">
-      <p>3年AI与科技内容经验，持续关注大模型、AI Agent 与企业AI应用方向，具备AI行业热点洞察、内容策划、B端品牌内容与活动统筹经验。</p>
-      <p>曾在 51CTO、法律科技公司、行业大会平台负责 AI 行业内容运营与专题策划，累计产出多篇10w+文章，具备从热点洞察、采访策划到行业内容传播的完整能力。</p>
-      <p>擅长将复杂技术与行业趋势转化为具备传播力和商业价值的内容表达。</p>
+  <div class="hero-badge">
+    <img src="导航页 SVG/电脑.svg" class="hero-badge-icon" alt="">
+    <span class="hero-badge-label">about me</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-bio reveal d1">
+        <p>3年 AI 与科技内容经验，持续关注大模型、AI Agent 与企业AI应用方向，具备 AI 行业热点洞察、内容策划、B 端品牌内容与活动统筹经验。</p>
+        <p>曾在科技媒体、法律科技公司工作，负责 AI 行业内容运营与专题策划，累计产出多篇 10w+ 文章，具备从热点洞察、采访策划到行业内容传播的完整能力。</p>
+      </div>
+      <div class="hero-buttons reveal d3">
+        <a href="#portfolio" class="btn btn-light">查看作品</a>
+        <a href="#contact" class="btn btn-dark">联系我</a>
+      </div>
     </div>
-    <div class="hero-buttons reveal d3">
-      <a href="#portfolio" class="btn btn-light">查看作品</a>
-      <a href="#contact" class="btn btn-dark">联系我</a>
+    <div class="hero-center">
+      <img src="导航页 SVG/人物2.svg" class="hero-figure reveal" alt="">
+    </div>
+    <div class="hero-right">
+      <div class="hero-bio reveal d2">
+        <p>擅长将复杂技术与行业趋势转化为具备传播力和商业价值的内容表达。</p>
+        <p>希望离 AI 产品更近一步——不只是第三视角的观察，而是用好我对AI行业的判断力和对用户的理解，帮助产品被更多的人了解和使用。</p>
+      </div>
     </div>
   </div>
-  <div class="hero-right reveal d2">
-    <div class="hero-stats">
-      <div class="stat-row">
-        <div class="stat-num">10w+</div>
-        <div class="stat-lbl">单篇最高阅读（51CTO）</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">30万+</div>
-        <div class="stat-lbl">直播峰值观看（引领者大会）</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">6w+</div>
-        <div class="stat-lbl">小红书单篇阅读 · 5k+获赞</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">NPS 77.32%</div>
-        <div class="stat-lbl">技术峰会参会者满意度</div>
-      </div>
-    </div>
-    <div class="accent-card accent-card-rose" style="margin-top:20px;">
-      <p>AI行业专注　3年<br>内容方向　B端 · C端<br>城市　北京<br>求职意向　内容运营 / 品牌公关</p>
-    </div>
-    <div class="edu-block" style="margin-top:16px;">
-      <div class="edu-label">教育背景</div>
-      <div class="edu-school">天津外国语大学<br>广告学硕士 · GPA 3.82 · 一等奖学金</div>
-      <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
-        <div class="edu-school">山东师范大学</div>
-        <div style="font-size:12px; color:var(--muted); margin-top:2px;">数字媒体艺术学士 · 金犊奖优秀奖</div>
-      </div>
-    </div>
-    <div class="rotated-label">AI · 内容 · 传播 · 策划</div>
-  </div>
-  <div class="hero-wm">李美涵</div>
 </section>
 
 <!-- ── 02 代表作品 ── -->
