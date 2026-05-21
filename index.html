@@ -6,8 +6,8 @@
   <title>李美涵 — AI内容运营</title>
   <style>
     :root {
-      --bg: #F5E8E4;
-      --surface: #FDF8F6;
+      --bg: #FFFFFF;
+      --surface: #FAFAFA;
       --ink: #1C1614;
       --body: #3A2E2C;
       --muted: #9E8480;
@@ -15,8 +15,8 @@
       --rose: #E8B4B0;
       --rose-card: #F2D4D0;
       --cream: #F5EDE8;
-      --divider: #E2D4D0;
-      --grid-line: #E8D8D4;
+      --divider: #E8E8E8;
+      --grid-line: rgba(0, 0, 0, 0.05);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,13 +24,21 @@
 
     body {
       background-color: var(--bg);
-      background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 27px,
-        var(--grid-line) 27px,
-        var(--grid-line) 28px
-      );
+      background-image:
+        repeating-linear-gradient(
+          to right,
+          transparent 0px,
+          transparent 27px,
+          var(--grid-line) 27px,
+          var(--grid-line) 28px
+        ),
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 27px,
+          var(--grid-line) 27px,
+          var(--grid-line) 28px
+        );
       color: var(--body);
       font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
                    'Microsoft YaHei', 'Helvetica Neue', Helvetica, sans-serif;
@@ -51,7 +59,7 @@
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(253, 248, 246, 0.93);
+      background: rgba(245, 244, 240, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom-color: var(--divider);
@@ -141,14 +149,13 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 56px;
+      padding: 120px 56px 100px;
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 320px;
       gap: 64px;
-      align-items: center;
+      align-items: start;
       position: relative;
     }
     .hero-label {
@@ -167,13 +174,17 @@
       letter-spacing: -0.02em;
       margin-bottom: 32px;
     }
-    .hero-sub {
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 460px;
-      line-height: 1.75;
-      margin-bottom: 44px;
+    .hero-bio {
+      margin-bottom: 40px;
     }
+    .hero-bio p {
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.85;
+      margin-bottom: 16px;
+      max-width: 500px;
+    }
+    .hero-bio p:last-child { margin-bottom: 0; }
     .hero-buttons {
       display: flex;
       gap: 14px;
@@ -582,13 +593,24 @@
       user-select: none;
       pointer-events: none;
     }
-    .ls-pc     { width: 442px; left: 380px; top:  35px; z-index: 3; }
+    .ls-pc {
+      width: 442px; left: 380px; top: 85px; z-index: 3;
+      pointer-events: auto !important;
+      cursor: default;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.4s ease;
+    }
+    .ls-pc:hover {
+      transform: translateY(-10px) scale(1.035);
+      filter: drop-shadow(0 20px 40px rgba(232, 180, 176, 0.55))
+              drop-shadow(0 6px 14px rgba(28, 22, 20, 0.13));
+    }
     .ls-plant  { width: 267px; left: -23px; top:  50px; z-index: 2; }
-    .ls-books  { width: 260px; left:  23px; top: 369px; z-index: 1; }
-    .ls-paper  { width: 127px; left: 220px; top: 465px; z-index: 2; }
-    .ls-photo  { width: 182px; left: 820px; top:  14px; z-index: 4; }
-    .ls-medal  { width: 160px; left: 930px; top: 195px; z-index: 4; }
-    .ls-coffee { width: 222px; left: 880px; top: 410px; z-index: 2; }
+    .ls-books  { width: 260px; left:  23px; top: 310px; z-index: 1; }
+    .ls-paper  { width: 127px; left: 220px; top: 222px; z-index: 2; }
+    .ls-photo  { width: 182px; left: 820px; top:  70px; z-index: 4; }
+    .ls-medal  { width: 160px; left: 1030px; top: 195px; z-index: 4; }
+    .ls-coffee { width: 222px; left: 880px; top: 370px; z-index: 2; }
 
     /* ── ANIMATIONS ── */
     .reveal {
@@ -612,18 +634,14 @@
 
       .hero {
         grid-template-columns: 1fr;
-        padding: 0 28px;
-        min-height: auto;
-        padding-top: 120px;
-        padding-bottom: 64px;
+        padding: 100px 28px 64px;
       }
       .hero-title { font-size: 50px; }
-      .hero-wm { font-size: 56px; bottom: 16px; right: 28px; }
+      .hero-wm { display: none; }
 
       .section-wrap { padding: 72px 28px; }
       .section-num-big { font-size: 60px; }
 
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .rotated-label { display: none; }
 
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -686,68 +704,55 @@
   </div>
 </section>
 
-<!-- ── HERO ── -->
-<section class="hero" id="hero">
+<!-- ── HERO + ABOUT ── -->
+<section class="hero" id="about">
   <div class="hero-left">
     <p class="hero-label reveal">AI内容运营 · 技术品牌公关 · 北京</p>
     <h1 class="hero-title reveal d1">追AI前沿，<br>也追<br>十万读者</h1>
-    <p class="hero-sub reveal d2">三年聚焦大模型与企业AI，内容月均阅读1w+，多篇10w+爆款；策划统筹300人技术峰会，NPS 77.32%。现寻求内容运营 · 技术品牌公关方向机会。</p>
+    <div class="hero-bio reveal d2">
+      <p>3年AI与科技内容经验，持续关注大模型、AI Agent 与企业AI应用方向，具备AI行业热点洞察、内容策划、B端品牌内容与活动统筹经验。</p>
+      <p>曾在 51CTO、法律科技公司、行业大会平台负责 AI 行业内容运营与专题策划，累计产出多篇10w+文章，具备从热点洞察、采访策划到行业内容传播的完整能力。</p>
+      <p>擅长将复杂技术与行业趋势转化为具备传播力和商业价值的内容表达。</p>
+    </div>
     <div class="hero-buttons reveal d3">
       <a href="#portfolio" class="btn btn-light">查看作品</a>
       <a href="#contact" class="btn btn-dark">联系我</a>
     </div>
   </div>
-  <div class="hero-stats reveal d2">
-    <div class="stat-row">
-      <div class="stat-num">10w+</div>
-      <div class="stat-lbl">单篇最高阅读（51CTO）</div>
+  <div class="hero-right reveal d2">
+    <div class="hero-stats">
+      <div class="stat-row">
+        <div class="stat-num">10w+</div>
+        <div class="stat-lbl">单篇最高阅读（51CTO）</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">30万+</div>
+        <div class="stat-lbl">直播峰值观看（引领者大会）</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">6w+</div>
+        <div class="stat-lbl">小红书单篇阅读 · 5k+获赞</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">NPS 77.32%</div>
+        <div class="stat-lbl">技术峰会参会者满意度</div>
+      </div>
     </div>
-    <div class="stat-row">
-      <div class="stat-num">30万+</div>
-      <div class="stat-lbl">直播峰值观看（引领者大会）</div>
+    <div class="accent-card accent-card-rose" style="margin-top:20px;">
+      <p>AI行业专注　3年<br>内容方向　B端 · C端<br>城市　北京<br>求职意向　内容运营 / 品牌公关</p>
     </div>
-    <div class="stat-row">
-      <div class="stat-num">6w+</div>
-      <div class="stat-lbl">小红书单篇阅读 · 5k+获赞</div>
+    <div class="edu-block" style="margin-top:16px;">
+      <div class="edu-label">教育背景</div>
+      <div class="edu-school">天津外国语大学<br>广告学硕士 · GPA 3.82 · 一等奖学金</div>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
+        <div class="edu-school">山东师范大学</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:2px;">数字媒体艺术学士 · 金犊奖优秀奖</div>
+      </div>
     </div>
-    <div class="stat-row">
-      <div class="stat-num">NPS 77.32%</div>
-      <div class="stat-lbl">技术峰会参会者满意度</div>
-    </div>
+    <div class="rotated-label">AI · 内容 · 传播 · 策划</div>
   </div>
   <div class="hero-wm">李美涵</div>
 </section>
-
-<!-- ── 01 关于 ── -->
-<div class="section-wrap" id="about">
-  <div class="section-rule"></div>
-  <div class="section-tag reveal">
-    <span class="section-num-big">01</span>
-    <span class="section-label-text">关于</span>
-  </div>
-  <div class="about-grid">
-    <div class="about-body reveal">
-      <h2 class="about-hl">从大模型论文到十万爆款，<br>中间那段路<br>就是我做的事</h2>
-      <p>三年来，我围绕大模型、AI Agent 与企业AI应用持续输出内容。在51CTO做技术编辑时，每月产出10-15篇头条文章，平均阅读1w+，多篇10w+爆款；去做内容运营时，策划统筹了一场200+律所合伙人参与、30万+线上观看的行业峰会。这两件事，我都干过。</p>
-      <p>我不只追热点。拆解大模型原理、测评最新AI产品、给企业客户写品牌PR稿、做技术白皮书——这些都有实际交付。小红书单篇ChatGPT Prompt内容阅读6w+、获赞5k+，证明我也能把技术话题写给普通人看懂。</p>
-      <p>目前正在寻找内容运营或技术品牌公关方向的全职岗位，希望在真正做AI的公司，把内容变成有实际价值的东西。</p>
-    </div>
-    <div class="about-right reveal d1">
-      <div class="accent-card accent-card-rose">
-        <p>AI行业专注　3年<br>内容方向　B端 · C端<br>城市　北京<br>求职意向　内容运营 / 品牌公关</p>
-      </div>
-      <div class="edu-block">
-        <div class="edu-label">教育背景</div>
-        <div class="edu-school">天津外国语大学<br>广告学硕士 · GPA 3.82 · 一等奖学金</div>
-        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--divider);">
-          <div class="edu-school">山东师范大学</div>
-          <div style="font-size:12px; color:var(--muted); margin-top:2px;">数字媒体艺术学士 · 金犊奖优秀奖</div>
-        </div>
-      </div>
-      <div class="rotated-label">AI · 内容 · 传播 · 策划</div>
-    </div>
-  </div>
-</div>
 
 <!-- ── 02 代表作品 ── -->
 <div class="section-wrap" id="portfolio">
