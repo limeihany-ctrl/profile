@@ -6,13 +6,12 @@ const PAGE_URL = 'file:///E:/cc-project/profile/index.html';
 const OUT_DIR = path.join(__dirname, 'screenshots');
 
 const SECTIONS = [
-  { id: 'landing',   name: '00-landing' },
-  { id: 'hero',      name: '01-hero' },
-  { id: 'about',     name: '02-about' },
-  { id: 'portfolio', name: '03-portfolio' },
-  { id: 'work',      name: '04-work' },
-  { id: 'expertise', name: '05-expertise' },
-  { id: 'contact',   name: '06-contact' },
+  { id: 'landing',   file: '01-landing.png' },
+  { id: 'about',     file: '02-hero.png' },
+  { id: 'portfolio', file: '03-portfolio.png' },
+  { id: 'work',      file: '04-work.png' },
+  { id: 'expertise', file: '05-expertise.png' },
+  { id: 'contact',   file: '06-contact.png' },
 ];
 
 (async () => {
@@ -27,7 +26,6 @@ const SECTIONS = [
 
   await page.goto(PAGE_URL, { waitUntil: 'networkidle0' });
 
-  // Trigger all scroll-reveal animations and freeze transitions
   await page.evaluate(() => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
     const s = document.createElement('style');
@@ -37,7 +35,6 @@ const SECTIONS = [
 
   await new Promise(r => setTimeout(r, 400));
 
-  // Per-section viewport screenshots
   for (const section of SECTIONS) {
     await page.evaluate(id => {
       const el = document.getElementById(id);
@@ -46,12 +43,10 @@ const SECTIONS = [
 
     await new Promise(r => setTimeout(r, 200));
 
-    await page.screenshot({
-      path: path.join(OUT_DIR, `${section.name}.png`),
-    });
-    console.log(`✓  ${section.name}.png`);
+    await page.screenshot({ path: path.join(OUT_DIR, section.file) });
+    console.log(`✓  ${section.file}`);
   }
 
   await browser.close();
-  console.log(`\nAll screenshots saved to ./screenshots/ (${SECTIONS.length} files)`);
+  console.log(`\nDone — ${SECTIONS.length} screenshots in ./screenshots/`);
 })();

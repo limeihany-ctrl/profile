@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>李美涵 — AI内容运营</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #FFFFFF;
@@ -418,44 +421,130 @@
     }
 
     /* ── PORTFOLIO ── */
+    .pf-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 52px;
+    }
+    .pf-heading-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .pf-heading-title {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
     .portfolio-intro {
       font-size: 15px;
       color: var(--muted);
       line-height: 1.7;
       max-width: 560px;
-      margin-bottom: 52px;
+      margin-bottom: 80px;
     }
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      column-gap: 24px;
+      row-gap: 120px;
     }
     .pf-card {
-      background: var(--surface);
-      border: 1px solid var(--divider);
-      padding: 26px 24px 28px;
+      --pf-bg:     #FAFAFA;
+      --pf-border: #E0D8D4;
+      --pf-tab:    #C8B8B0;
+      border-radius: 20px;
+      border: 1.5px solid var(--pf-border);
+      background-color: var(--pf-bg);
+      /* left-edge ring dots */
+      background-image: radial-gradient(circle, rgba(255,255,255,0.8) 4px, transparent 4px);
+      background-size: 22px 26px;
+      background-position: 1px 20px;
+      background-repeat: repeat-y;
+      padding: 43px 26px 43px 44px;
+      min-height: 310px;
       display: flex;
       flex-direction: column;
       text-decoration: none;
-      transition: border-color 0.25s;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
+    /* dashed inner outline */
     .pf-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      inset: 8px 8px 8px 28px;
+      border-radius: 13px;
+      border: 1.5px dashed var(--pf-border);
+      pointer-events: none;
+      opacity: 0.75;
     }
-    .pf-card.c-hot::before   { background: var(--rose); }
-    .pf-card.c-deep::before  { background: #B8C8D8; }
-    .pf-card.c-review::before{ background: var(--mint); }
-    .pf-card.c-pr::before    { background: #D4C8B0; }
-    .pf-card.c-book::before  { background: #C8B8D0; }
-    .pf-card.c-social::before{ background: #F0D0B8; }
-    .pf-card:hover { border-color: var(--muted); }
+    /* right bookmark tab */
+    .pf-card::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 22px;
+      width: 12px;
+      height: 34px;
+      border-radius: 0 8px 8px 0;
+      background: var(--pf-tab);
+    }
+    /* per-type pastel palette */
+    .pf-card.c-hot    { --pf-bg: #FBF0EF; --pf-border: #E0B0AC; --pf-tab: #C98882; }
+    .pf-card.c-deep   { --pf-bg: #EEF3F8; --pf-border: #A8BED0; --pf-tab: #7A9CB8; }
+    .pf-card.c-review { --pf-bg: #EBF7F5; --pf-border: #96CCC8; --pf-tab: #62ADAA; }
+    .pf-card.c-pr     { --pf-bg: #F8F3EA; --pf-border: #C8BCA4; --pf-tab: #A09278; }
+    .pf-card.c-book   { --pf-bg: #F1ECF8; --pf-border: #BCA8CC; --pf-tab: #9478AC; }
+    .pf-card.c-social { --pf-bg: #FEF4EC; --pf-border: #E8C4A0; --pf-tab: #C8966C; }
+    .pf-card > * { position: relative; z-index: 1; }
+    .pf-subtitle {
+      font-family: 'ZCOOL KuaiLe', cursive;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: -10px;
+      margin-bottom: 24px;
+    }
+    .pf-articles {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-article {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 0;
+      min-height: 102px;
+      border-bottom: 1px dashed var(--pf-border);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+    .pf-article:last-child { border-bottom: none; padding-bottom: 0; }
+    .pf-article:first-child { padding-top: 0; }
+    .pf-article:hover { opacity: 0.7; }
+    .pf-article-title {
+      font-size: 12.5px;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .pf-article-metric {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--rose);
+      letter-spacing: -0.01em;
+      align-self: flex-end;
+    }
     .pf-type {
-      font-size: 9.5px;
+      font-size: 20px;
+      font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--muted);
       margin-bottom: 14px;
@@ -841,39 +930,59 @@
 <!-- ── 02 代表作品 ── -->
 <div class="section-wrap" id="portfolio">
   <div class="section-rule"></div>
-  <div class="section-tag reveal">
-    <span class="section-num-big">02</span>
-    <span class="section-label-text">代表作品</span>
+  <div class="pf-heading reveal">
+    <img src="导航页 SVG/书本.svg" class="pf-heading-icon" alt="">
+    <span class="pf-heading-title">Things I've Built</span>
   </div>
-  <p class="portfolio-intro reveal">覆盖热点爆文、行业深度、产品测评、客户PR稿与技术白皮书，展示在不同场景下的内容交付能力。</p>
   <div class="portfolio-grid">
 
-    <a class="pf-card c-hot reveal" href="https://mp.weixin.qq.com/s/6GjFFUG4B-QWMvbLpBbJDg" target="_blank" rel="noopener">
-      <div class="pf-type">热点爆文 · 51CTO</div>
-      <div class="pf-title">《突发！TikTok或1月19日美国全面下架，曝苹果和谷歌已接到官方通知》</div>
-      <div class="pf-meta">
-        <span class="pf-source">51CTO · 头条</span>
-        <span class="pf-metric">10w+</span>
+    <div class="pf-card c-hot reveal">
+      <div class="pf-type">科技文章</div>
+      <div class="pf-subtitle">AI热点 · 行业趋势洞察</div>
+      <div class="pf-articles">
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/PqTR5QLqfvTodB0hzzpCyA" target="_blank" rel="noopener">
+          <div class="pf-article-title">神速！枪击特朗普刺客手机已被破解！一文讲解FBI破解手机有多难：曾找苹果CEO库克建后门惹怒被拒，FBI：花百万美元我们自己搞！</div>
+          <div class="pf-article-metric">10w+</div>
+        </a>
+        <a class="pf-article" href="http://mp.weixin.qq.com/s/dilOnnCNHPlSM5M4ywN8NQ" target="_blank" rel="noopener">
+          <div class="pf-article-title">Claude高阶玩法泄露！Reddit高赞帖：别只会对AI说"帮我修这个 bug"，老手都在配置现成指令库！网友：指挥AI是关键</div>
+          <div class="pf-article-metric">2.8w</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/BFf577eUfpxptUHATg72qg" target="_blank" rel="noopener">
+          <div class="pf-article-title">X和OpenAI加入Rust重写潮！马斯克宣布：基于Rust的X有了"比特币风格加密"，惨被币圈技术大佬群嘲：根本不懂！</div>
+          <div class="pf-article-metric">2.3w</div>
+        </a>
       </div>
-    </a>
+    </div>
 
-    <a class="pf-card c-deep reveal d1" href="https://mp.weixin.qq.com/s/yYsrfZyz-oHgKK7mkzz0lQ" target="_blank" rel="noopener">
-      <div class="pf-type">行业深度 · 51CTO</div>
-      <div class="pf-title">《年中复盘：大模型六小虎生存现状盘点》——文末率先预判IPO为AI公司另一选择</div>
-      <div class="pf-meta">
-        <span class="pf-source">51CTO · 深度</span>
-        <span class="pf-metric">行业影响</span>
+    <div class="pf-card c-deep reveal d1">
+      <div class="pf-type">AI产品测评·推广</div>
+      <div class="pf-subtitle">理解产品场景、挖掘亮点和使用技巧</div>
+      <div class="pf-articles">
+        <a class="pf-article" href="https://mp.weixin.qq.com/s?__biz=MzkwODM4MDYzOA==&mid=2247492759&idx=1&sn=ed73179ce5f80c962550fa6100286e8e&chksm=c13fcf7980b96e95df40a108787d700ad79293abd7bd41f2a3fadbb1734b40b31c0cde317b7f&scene=126&sessionid=1744972669#rd" target="_blank" rel="noopener">
+          <div class="pf-article-title">智谱视频版"Her"上手实测，国产大模型已经这么实用了吗？</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/f6fUqfcn2JNXSXylN8h01Q" target="_blank" rel="noopener">
+          <div class="pf-article-title">我摊牌了！试用完"高搜商"的新Kimi以后，我想激情安利给所有人</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/S7gZQAL_Yn-QXf-i7Hpc4A" target="_blank" rel="noopener">
+          <div class="pf-article-title">《腾讯文档也能用上DeepSeek R1满血版了！腾讯已涨超7.5%！实测：丝滑生成哪吒3预测PPT》</div>
+        </a>
       </div>
-    </a>
+    </div>
 
-    <a class="pf-card c-review reveal d2" href="https://mp.weixin.qq.com/s/S7gZQAL_Yn-QXf-i7Hpc4A" target="_blank" rel="noopener">
-      <div class="pf-type">产品测评 · 51CTO</div>
-      <div class="pf-title">《腾讯文档也能用上DeepSeek R1满血版！实测：丝滑生成哪吒3预测PPT》</div>
-      <div class="pf-meta">
-        <span class="pf-source">51CTO · 测评</span>
-        <span class="pf-metric">DeepSeek R1</span>
+    <div class="pf-card c-review reveal d2">
+      <div class="pf-type">AI深度解读</div>
+      <div class="pf-subtitle">理解AI技术与能力，翻译为系统化的知识内容，降低使用门槛</div>
+      <div class="pf-articles">
+        <a class="pf-article" href="https://my.feishu.cn/wiki/WLoPwPywEi2annktoz8cqKPonIf#share-NTNLd5sA6oHOUVx7m1WcDpFWnDg" target="_blank" rel="noopener">
+          <div class="pf-article-title">技术白皮书《DeepSeek 入门宝典》</div>
+        </a>
+        <a class="pf-article" href="#" onclick="event.preventDefault(); openLightbox('document/Claude Code万字级保姆级教程.png')">
+          <div class="pf-article-title">教程（个人项目）《Claude Code 文科生保姆级指南——从0搭建个人网站》</div>
+        </a>
       </div>
-    </a>
+    </div>
 
     <a class="pf-card c-pr reveal" href="https://mp.weixin.qq.com/s/52isJW4sh4rmtk-_UcD9rw" target="_blank" rel="noopener">
       <div class="pf-type">客户 PR 稿 · Alpha AI</div>
@@ -1051,6 +1160,60 @@
     });
   });
 
+</script>
+
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<style>
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.82);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    backdrop-filter: blur(6px);
+  }
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-overlay img {
+    max-width: 88vw;
+    max-height: 88vh;
+    border-radius: 10px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+    cursor: default;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 28px;
+    right: 36px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: #fff; }
+</style>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 </body>
 </html>
