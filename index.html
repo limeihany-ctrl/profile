@@ -205,7 +205,13 @@
     .hero-bio p:last-child { margin-bottom: 0; }
     .hl {
       background: linear-gradient(transparent 45%, rgba(255, 220, 40, 0.55) 45%);
+      background-size: 0% 100%;
+      background-repeat: no-repeat;
       padding-bottom: 1px;
+      transition: background-size 0.55s ease;
+    }
+    .hero-bio.in .hl {
+      background-size: 100% 100%;
     }
     .hero-buttons {
       display: flex;
@@ -471,6 +477,15 @@
       text-decoration: none;
       position: relative;
       overflow: visible;
+      transition: transform 0.25s cubic-bezier(0.34, 1.3, 0.64, 1),
+                  box-shadow 0.25s ease,
+                  border-color 0.25s ease;
+    }
+    .pf-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--pf-tab);
+      box-shadow: 0 20px 40px -8px rgba(0,0,0,0.18),
+                  0 0 0 1px var(--pf-tab);
     }
     /* dashed inner outline */
     .pf-card::before {
@@ -502,7 +517,7 @@
     .pf-card.c-social { --pf-bg: #FEF4EC; --pf-border: #E8C4A0; --pf-tab: #C8966C; }
     .pf-card > * { position: relative; z-index: 1; }
     .pf-subtitle {
-      font-family: 'ZCOOL KuaiLe', cursive;
+      font-family: 'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif;
       font-size: 13px;
       color: var(--muted);
       letter-spacing: 0.08em;
@@ -534,11 +549,11 @@
       line-height: 1.6;
     }
     .pf-article-metric {
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--rose);
+      font-family: inherit;
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--pf-tab);
       letter-spacing: -0.01em;
       align-self: flex-end;
     }
@@ -795,8 +810,51 @@
       transform: translateX(-50%) translateY(0);
     }
     .ls-plant  { width: 267px; left: -23px; top:  50px; z-index: 2; }
-    .ls-books  { width: 260px; left:  23px; top: 310px; z-index: 1; }
     .ls-paper  { width: 127px; left: 220px; top: 222px; z-index: 2; }
+    .ls-books {
+      position: absolute;
+      width: 260px; left: 23px; top: 310px; z-index: 1;
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .ls-books img {
+      position: static !important;
+      width: 100%;
+      display: block;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.4s ease;
+    }
+    .ls-books:hover img {
+      transform: translateY(-10px) scale(1.035);
+      filter: drop-shadow(0 20px 40px rgba(180, 200, 220, 0.55))
+              drop-shadow(0 6px 14px rgba(28, 22, 20, 0.13));
+    }
+    .ls-books-tip {
+      position: absolute;
+      left: 50%;
+      bottom: -36px;
+      transform: translateX(-50%) translateY(6px);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--divider);
+      padding: 5px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .ls-books:hover .ls-books-tip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
     .ls-photo  { width: 182px; left: 820px; top:  70px; z-index: 4; }
     .ls-medal  { width: 160px; left: 1030px; top: 195px; z-index: 4; }
     .ls-coffee { width: 222px; left: 880px; top: 370px; z-index: 2; }
@@ -887,7 +945,10 @@
       <span class="ls-pc-tip">about me</span>
     </a>
     <img class="ls-plant"  src="导航页 SVG/植物.svg"     alt="">
-    <img class="ls-books"  src="导航页 SVG/书本.svg"     alt="">
+    <a class="ls-books" href="#portfolio">
+      <img src="导航页 SVG/书本.svg" alt="">
+      <span class="ls-books-tip">Things I've Built</span>
+    </a>
     <img class="ls-paper"  src="导航页 SVG/纸团.svg"     alt="">
     <img class="ls-photo"  src="导航页 SVG/照片.svg"     alt="">
     <img class="ls-medal"  src="导航页 SVG/奖牌.svg"     alt="">
@@ -942,15 +1003,15 @@
       <div class="pf-articles">
         <a class="pf-article" href="https://mp.weixin.qq.com/s/PqTR5QLqfvTodB0hzzpCyA" target="_blank" rel="noopener">
           <div class="pf-article-title">神速！枪击特朗普刺客手机已被破解！一文讲解FBI破解手机有多难：曾找苹果CEO库克建后门惹怒被拒，FBI：花百万美元我们自己搞！</div>
-          <div class="pf-article-metric">10w+</div>
+          <div class="pf-article-metric">阅读量：10w+</div>
         </a>
         <a class="pf-article" href="http://mp.weixin.qq.com/s/dilOnnCNHPlSM5M4ywN8NQ" target="_blank" rel="noopener">
           <div class="pf-article-title">Claude高阶玩法泄露！Reddit高赞帖：别只会对AI说"帮我修这个 bug"，老手都在配置现成指令库！网友：指挥AI是关键</div>
-          <div class="pf-article-metric">2.8w</div>
+          <div class="pf-article-metric">阅读量：2.8w</div>
         </a>
         <a class="pf-article" href="https://mp.weixin.qq.com/s/BFf577eUfpxptUHATg72qg" target="_blank" rel="noopener">
           <div class="pf-article-title">X和OpenAI加入Rust重写潮！马斯克宣布：基于Rust的X有了"比特币风格加密"，惨被币圈技术大佬群嘲：根本不懂！</div>
-          <div class="pf-article-metric">2.3w</div>
+          <div class="pf-article-metric">阅读量：2.3w</div>
         </a>
       </div>
     </div>
@@ -972,10 +1033,27 @@
     </div>
 
     <div class="pf-card c-review reveal d2">
+      <div class="pf-type">法律AI产品市场内容搭建</div>
+      <div class="pf-subtitle">AI 产品解释能力，用 AI 为组织业务赋能</div>
+      <div class="pf-articles">
+        <div class="pf-article pf-article-nolink">
+          <div class="pf-article-title">项目 · 市场部赋能销售AI知识库</div>
+          <div class="pf-article-desc">根据销售反馈的高频内容，使用 Dify 搭建内部 AI 内容检索系统，销售可通过提问找到相应品牌物料 or 产品卖点。</div>
+        </div>
+        <a class="pf-article" href="#" onclick="event.preventDefault(); openLightbox('document/产品手册.png', 'document/法律 AI 产品 Alpha 用户手册.pdf')">
+          <div class="pf-article-title">法律AI产品 Alpha+ 产品手册</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/oTzI5ivMp2az0-IoQfiawg" target="_blank" rel="noopener">
+          <div class="pf-article-title">AI产品客户案例 · iCourt×法德东恒：Tims 数智化效率平台重磅发布</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="pf-card c-pr reveal">
       <div class="pf-type">AI深度解读</div>
       <div class="pf-subtitle">理解AI技术与能力，翻译为系统化的知识内容，降低使用门槛</div>
       <div class="pf-articles">
-        <a class="pf-article" href="https://my.feishu.cn/wiki/WLoPwPywEi2annktoz8cqKPonIf#share-NTNLd5sA6oHOUVx7m1WcDpFWnDg" target="_blank" rel="noopener">
+        <a class="pf-article" href="#" onclick="event.preventDefault(); openLightbox('document/技术白皮书.png', 'document/DeepSeek入门宝典（1）技术解析篇.pdf')">
           <div class="pf-article-title">技术白皮书《DeepSeek 入门宝典》</div>
         </a>
         <a class="pf-article" href="#" onclick="event.preventDefault(); openLightbox('document/Claude Code万字级保姆级教程.png')">
@@ -984,30 +1062,43 @@
       </div>
     </div>
 
-    <a class="pf-card c-pr reveal" href="https://mp.weixin.qq.com/s/52isJW4sh4rmtk-_UcD9rw" target="_blank" rel="noopener">
-      <div class="pf-type">客户 PR 稿 · Alpha AI</div>
-      <div class="pf-title">《用AI讲好15分钟的"长"故事，爱奇艺又一次选了难而正确的路》</div>
-      <div class="pf-meta">
-        <span class="pf-source">爱奇艺 · 品牌</span>
-        <span class="pf-metric">B端公关</span>
+    <div class="pf-card c-book reveal d1">
+      <div class="pf-type">视频内容</div>
+      <div class="pf-subtitle">短视频选题、剪辑、包装</div>
+      <div class="pf-articles">
+        <a class="pf-article" href="#" onclick="event.preventDefault(); openVideoLightbox('document/视频1.mp4')">
+          <div class="pf-video-row">
+            <span class="pf-play-btn">▶</span>
+            <div class="pf-article-title">美国AI能超中国5到10年?扎克伯格提了个小目标:能守住6个月优势就够了!</div>
+          </div>
+          <div class="pf-article-metric">阅读量：3w+</div>
+        </a>
+        <a class="pf-article" href="#" onclick="event.preventDefault(); openVideoLightbox('document/视频2.mp4')">
+          <div class="pf-video-row">
+            <span class="pf-play-btn">▶</span>
+            <div class="pf-article-title">马斯克的星链让原始部落陷入混乱!年轻人不再说话、不再行动、不再工作。长老:紧急断网</div>
+          </div>
+          <div class="pf-article-metric">阅读量：2w+</div>
+        </a>
       </div>
-    </a>
+    </div>
 
-    <a class="pf-card c-book reveal d1" href="https://mp.weixin.qq.com/s/9gfSx_6KHEFLXlshO-vwuw" target="_blank" rel="noopener">
-      <div class="pf-type">客户 PR 稿 · Alpha AI</div>
-      <div class="pf-title">《AGI的这个致命缺陷，一家光伏龙头正在寻找解决答案》</div>
-      <div class="pf-meta">
-        <span class="pf-source">阳光电源 · 品牌</span>
-        <span class="pf-metric">跨行业AI</span>
-      </div>
-    </a>
-
-    <div class="pf-card c-social reveal d2" style="cursor:default;">
-      <div class="pf-type">社媒内容 · 小红书</div>
-      <div class="pf-title">ChatGPT Prompt 使用经验分享，聚焦实用场景与提示词技巧</div>
-      <div class="pf-meta">
-        <span class="pf-source">小红书 · 个人号</span>
-        <span class="pf-metric">6w+ 阅读</span>
+    <div class="pf-card c-social reveal d2">
+      <div class="pf-type">PR稿件 & 人物专访</div>
+      <div class="pf-subtitle">挖掘产品的亮点、热点，与技术人员围绕科技话题展开访谈</div>
+      <div class="pf-articles pf-articles-compact">
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/9gfSx_6KHEFLXlshO-vwuw?token=1712603073&lang=zh_CN" target="_blank" rel="noopener">
+          <div class="pf-article-title">AGI 的这个致命缺陷，一家光伏龙头正在寻找解决答案</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s/52isJW4sh4rmtk-_UcD9rw?token=1712603073&lang=zh_CN" target="_blank" rel="noopener">
+          <div class="pf-article-title">用 AI 讲好 15 分钟的"长"故事，爱奇艺又一次选了难而正确的路</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s?__biz=MzU1NTEzOTM5Mw==&mid=2247546393&idx=1&sn=9d7a5bad54cfce897cab8dfec2b79960&chksm=fbda9e37ccad1721ef929fc629ba70611fe8c59c968d162a76ab217d0c6404194a38195ec819&token=680835519&lang=zh_CN#rd" target="_blank" rel="noopener">
+          <div class="pf-article-title">对话特看科技滚石：入局数字人的第一年，当深耕"AI+视觉"的技术团队离开大厂</div>
+        </a>
+        <a class="pf-article" href="https://mp.weixin.qq.com/s?__biz=MzU1NTEzOTM5Mw==&mid=2247544077&idx=1&sn=dc5583aa479bce5e887d4d67ad2112f3&chksm=fbda8523ccad0c355c7f1c97e089387c73a1c70a485d7cbc41c4fe0f6a59424ffa97bb73707e&token=1773214579&lang=zh_CN#rd" target="_blank" rel="noopener">
+          <div class="pf-article-title">亮风台唐荣兴：从业二十年，通讯、协作的"变"与"不变"</div>
+        </a>
       </div>
     </div>
 
@@ -1154,6 +1245,11 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  document.querySelectorAll('.hero-bio .hl').forEach((span, i) => {
+    span.style.transitionDelay = `${0.2 + i * 0.2}s`;
+  });
+
+
   requestAnimationFrame(() => {
     document.querySelectorAll('#hero .reveal').forEach(el => {
       setTimeout(() => el.classList.add('in'), 80);
@@ -1165,7 +1261,11 @@
 <!-- ── LIGHTBOX ── -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <video id="lightbox-video" controls style="display:none; max-width:88vw; max-height:80vh; border-radius:10px; box-shadow:0 32px 80px rgba(0,0,0,0.5);"></video>
+    <a id="lightbox-pdf-btn" class="lightbox-pdf-btn" href="#" target="_blank" rel="noopener" style="display:none;">进一步阅读 →</a>
+  </div>
 </div>
 
 <style>
@@ -1181,13 +1281,33 @@
     backdrop-filter: blur(6px);
   }
   .lightbox-overlay.open { display: flex; }
-  .lightbox-overlay img {
-    max-width: 88vw;
-    max-height: 88vh;
-    border-radius: 10px;
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  .lightbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     cursor: default;
   }
+  .lightbox-content img {
+    max-width: 88vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  }
+  .lightbox-pdf-btn {
+    display: inline-block;
+    padding: 9px 22px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .lightbox-pdf-btn:hover { background: rgba(255,255,255,0.22); }
   .lightbox-close {
     position: fixed;
     top: 28px;
@@ -1201,15 +1321,68 @@
     transition: color 0.2s;
   }
   .lightbox-close:hover { color: #fff; }
+  .pf-articles-compact .pf-article {
+    padding: 8px 0;
+    min-height: unset;
+  }
+  .pf-articles-compact .pf-article-title {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .pf-article-nolink { cursor: default; }
+  .pf-article-nolink:hover { opacity: 1; }
+  .pf-article-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-top: 4px;
+  }
+  .pf-video-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .pf-play-btn {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 7px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    padding-left: 1px;
+  }
 </style>
 
 <script>
-  function openLightbox(src) {
-    document.getElementById('lightbox-img').src = src;
+  function openLightbox(src, pdfUrl) {
+    const img = document.getElementById('lightbox-img');
+    const vid = document.getElementById('lightbox-video');
+    img.src = src;
+    img.style.display = '';
+    vid.pause(); vid.src = ''; vid.style.display = 'none';
+    const btn = document.getElementById('lightbox-pdf-btn');
+    if (pdfUrl) { btn.href = pdfUrl; btn.style.display = 'inline-block'; }
+    else { btn.style.display = 'none'; }
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function openVideoLightbox(src) {
+    const img = document.getElementById('lightbox-img');
+    const vid = document.getElementById('lightbox-video');
+    img.src = ''; img.style.display = 'none';
+    vid.src = src; vid.style.display = '';
+    document.getElementById('lightbox-pdf-btn').style.display = 'none';
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function closeLightbox() {
+    const vid = document.getElementById('lightbox-video');
+    vid.pause(); vid.src = '';
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
