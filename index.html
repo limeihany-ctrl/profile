@@ -20,6 +20,7 @@
       --cream: #F5EDE8;
       --divider: #E8E8E8;
       --grid-line: rgba(0, 0, 0, 0.05);
+      --vine: #8BAE78;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -620,12 +621,14 @@
       color: var(--ink);
       line-height: 1.25;
       width: fit-content;
-      padding: 2px 10px 4px;
+      padding: 5px 22px 7px 14px;
       margin-bottom: 8px;
+      border-radius: 4px 44px 44px 4px;
+      position: relative;
     }
-    .work-item:nth-child(1) .work-title { background: var(--mint); }
-    .work-item:nth-child(2) .work-title { background: var(--rose-card); }
-    .work-item:nth-child(3) .work-title { background: var(--cream); }
+    .work-item:nth-of-type(1) .work-title { background: var(--mint); }
+    .work-item:nth-of-type(2) .work-title { background: var(--rose-card); }
+    .work-item:nth-of-type(3) .work-title { background: var(--cream); }
     .work-co {
       font-size: 11px;
       letter-spacing: 0.14em;
@@ -1268,6 +1271,138 @@
       setTimeout(() => el.classList.add('in'), 80);
     });
   });
+
+  // ── VINE ──
+  (function buildVine() {
+    const list = document.querySelector('#work .work-list');
+    if (!list) return;
+    list.style.position = 'relative';
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const items = [...list.querySelectorAll('.work-item')];
+    const titles = items.map(it => it.querySelector('.work-title'));
+
+    // hide titles before first paint
+    titles.forEach(t => {
+      t.style.opacity = '0';
+      t.style.transform = 'scale(0.7) translateX(-10px)';
+    });
+
+    requestAnimationFrame(() => {
+      const listRect = list.getBoundingClientRect();
+      const H = list.offsetHeight;
+      const W = list.offsetWidth;
+      const vx = 26; // vine x in the 52px index column
+
+      // Leaf positions: y-midpoint and x-left-edge relative to list
+      const leaves = items.map((item, i) => {
+        const t = titles[i];
+        const tr = t.getBoundingClientRect();
+        return {
+          y: tr.top - listRect.top + tr.height / 2,
+          x: tr.left - listRect.left
+        };
+      });
+
+      // Build SVG
+      const svg = document.createElementNS(svgNS, 'svg');
+      Object.assign(svg.style, {
+        position: 'absolute', left: '0', top: '0',
+        width: W + 'px', height: H + 'px',
+        pointerEvents: 'none', overflow: 'visible', zIndex: '0'
+      });
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+
+      // Vine stem: path goes BOTTOM → TOP so dashoffset animation = bottom-to-top growth
+      const rev = [...leaves].reverse(); // start from bottom leaf
+      let d = `M ${vx} ${H}`;
+      let prevY = H;
+      rev.forEach(({ y }, i) => {
+        const w = i % 2 === 0 ? 10 : -10;
+        const dist = prevY - y;
+        d += ` C ${vx + w} ${prevY - dist * 0.32}, ${vx - w} ${y + dist * 0.32}, ${vx} ${y}`;
+        prevY = y;
+      });
+      d += ` C ${vx + 6} ${prevY * 0.55}, ${vx - 6} ${prevY * 0.15}, ${vx} 0`;
+
+      const stem = document.createElementNS(svgNS, 'path');
+      stem.setAttribute('d', d);
+      stem.setAttribute('fill', 'none');
+      stem.setAttribute('stroke', 'var(--vine)');
+      stem.setAttribute('stroke-width', '2.5');
+      stem.setAttribute('stroke-linecap', 'round');
+      stem.setAttribute('stroke-linejoin', 'round');
+      svg.appendChild(stem);
+
+      // Branch paths from vine to each leaf's left edge
+      const branchEls = leaves.map(({ x, y }) => {
+        const b = document.createElementNS(svgNS, 'path');
+        const mx = vx + (x - vx) * 0.52;
+        b.setAttribute('d', `M ${vx} ${y} Q ${mx} ${y - 11} ${x - 3} ${y}`);
+        b.setAttribute('fill', 'none');
+        b.setAttribute('stroke', 'var(--vine)');
+        b.setAttribute('stroke-width', '1.5');
+        b.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(b);
+        return b;
+      });
+
+      // Decorative dots at vine-leaf junctions
+      const dotEls = leaves.map(({ y }) => {
+        const c = document.createElementNS(svgNS, 'circle');
+        c.setAttribute('cx', vx); c.setAttribute('cy', y);
+        c.setAttribute('r', '3.5');
+        c.setAttribute('fill', 'var(--vine)');
+        c.style.opacity = '0';
+        svg.appendChild(c);
+        return c;
+      });
+
+      list.insertBefore(svg, list.firstChild);
+
+      // Init dash animations
+      const stemLen = stem.getTotalLength();
+      stem.style.strokeDasharray = stemLen;
+      stem.style.strokeDashoffset = stemLen;
+      branchEls.forEach(b => {
+        const l = b.getTotalLength();
+        b.style.strokeDasharray = l;
+        b.style.strokeDashoffset = l;
+      });
+
+      const TOTAL = 2000; // vine growth ms
+
+      const trigger = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        trigger.disconnect();
+
+        // Grow vine
+        stem.style.transition = `stroke-dashoffset ${TOTAL}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+        stem.style.strokeDashoffset = '0';
+
+        // Stagger each leaf: fire when vine reaches its y-position
+        leaves.forEach(({ y }, i) => {
+          const prop = (H - y) / H; // 0=bottom, 1=top
+          const delay = Math.round(prop * TOTAL);
+          setTimeout(() => {
+            // dot
+            dotEls[i].style.transition = 'opacity 0.2s ease';
+            dotEls[i].style.opacity = '1';
+            // branch
+            branchEls[i].style.transition = 'stroke-dashoffset 0.38s ease';
+            branchEls[i].style.strokeDashoffset = '0';
+            // leaf pop
+            titles[i].style.transition = 'opacity 0.42s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+            titles[i].style.opacity = '1';
+            titles[i].style.transform = 'scale(1) translateX(0)';
+          }, delay);
+        });
+      }, { threshold: 0.12 });
+
+      trigger.observe(document.getElementById('work'));
+    });
+  })();
 
 </script>
 
