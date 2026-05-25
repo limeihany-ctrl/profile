@@ -213,6 +213,9 @@
     .hero-bio.in .hl {
       background-size: 100% 100%;
     }
+    .work-item.hl-in .hl {
+      background-size: 100% 100%;
+    }
     .hero-buttons {
       display: flex;
       gap: 14px;
@@ -616,31 +619,48 @@
       font-size: 21px;
       color: var(--ink);
       line-height: 1.25;
-      margin-bottom: 5px;
+      width: fit-content;
+      padding: 2px 10px 4px;
+      margin-bottom: 8px;
     }
+    .work-item:nth-child(1) .work-title { background: var(--mint); }
+    .work-item:nth-child(2) .work-title { background: var(--rose-card); }
+    .work-item:nth-child(3) .work-title { background: var(--cream); }
     .work-co {
       font-size: 11px;
       letter-spacing: 0.14em;
       color: var(--muted);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
-    .work-highlights {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-    .work-hl-tag {
-      font-size: 11px;
-      color: var(--ink);
-      background: var(--rose-card);
-      padding: 3px 10px;
-      letter-spacing: 0.06em;
-    }
-    .work-desc {
-      font-size: 14px;
+    .work-intro {
+      font-size: 13.5px;
       color: var(--body);
-      line-height: 1.8;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .work-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .work-bullets li {
+      font-size: 13.5px;
+      color: var(--body);
+      line-height: 1.75;
+      padding-left: 16px;
+      position: relative;
+    }
+    .work-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--rose);
+      font-family: Georgia, serif;
+    }
+    .work-bullets li strong {
+      color: var(--ink);
+      font-weight: 600;
     }
     .work-date {
       font-size: 11.5px;
@@ -1108,9 +1128,9 @@
 <!-- ── 03 工作经历 ── -->
 <div class="section-wrap" id="work">
   <div class="section-rule"></div>
-  <div class="section-tag reveal">
-    <span class="section-num-big">03</span>
-    <span class="section-label-text">工作经历</span>
+  <div class="pf-heading reveal">
+    <img src="导航页 SVG/植物.svg" class="pf-heading-icon" alt="">
+    <span class="pf-heading-title">Work</span>
   </div>
   <ul class="work-list">
 
@@ -1118,13 +1138,13 @@
       <span class="work-idx">01.</span>
       <div>
         <div class="work-title">B端内容运营</div>
-        <div class="work-co">北京新橙科技 · Alpha AI · AlphaGPT法律AI</div>
-        <div class="work-highlights">
-          <span class="work-hl-tag">30万+ 直播观看</span>
-          <span class="work-hl-tag">GEO稿被主流AI收录</span>
-          <span class="work-hl-tag">月均50+销售线索</span>
-        </div>
-        <p class="work-desc">负责法律AI产品AlphaGPT的品牌内容运营，面向律所管理层做AI应用教育与案例策划，大律所客户案例曝光过万，多渠道内容矩阵为销售侧月均沉淀50+泛线索。统筹法律行业引领者大会部分内容与前期工作——200+律所主任/合伙人到场，30万+线上观看，会后GEO稿件被多家主流AI搜索引擎收录，是较早将内容策略延伸到生成式引擎优化（GEO）场景的实践。</p>
+        <div class="work-co">北京新橙科技 · Alpha AI产品线</div>
+        <p class="work-intro">围绕法律AI产品 AlphaGPT，面向律所管理层做<span class="hl">AI应用教育与品牌内容运营</span>。</p>
+        <ul class="work-bullets">
+          <li><strong>内容驱动增长</strong>：运营公众号/视频号/官网内容矩阵，大律所客户案例曝光过万，为销售侧月均沉淀 50+ 泛线索。</li>
+          <li><strong>大型活动内容统筹</strong>：参与法律行业引领者大会前期内容工作，大会共200+律所主任/合伙人参与，线上直播观看30万，会后GEO稿件被多家主流AI搜索引擎收录。</li>
+          <li><strong>AI工具落地实践</strong>：主导配合技术同事，基于Dify搭建市场部内部AI内容检索系统，销售可通过自然语言提问快速检索品牌物料与产品卖点，显著提升销售侧获取内容效率。</li>
+        </ul>
       </div>
       <div class="work-date">2025.11<br>2026.03</div>
     </li>
@@ -1134,12 +1154,11 @@
       <div>
         <div class="work-title">AI方向技术编辑</div>
         <div class="work-co">51CTO · 北京无忧创想信息科技</div>
-        <div class="work-highlights">
-          <span class="work-hl-tag">多篇10w+爆款</span>
-          <span class="work-hl-tag">月均10-15篇 · 平均1w+阅读</span>
-          <span class="work-hl-tag">短视频全链路独立完成</span>
-        </div>
-        <p class="work-desc">深度追踪大模型领域——OpenAI、Meta、大模型六小虎、DeepSeek等，撰写热点文章与深度报道；核心能力是选题嗅觉，能在TikTok禁令、FBI破解手机、程序员失业等热点中找到科技媒体的独特切入角，多篇10w+爆款印证这一判断力；同时承担AI产品测评与DeepSeek R1深度解析，以及从选题到成片的科技短视频全链路制作。</p>
+        <p class="work-intro">深度追踪大模型领域，产出AI热点与深度策划内容，<span class="hl">月均10-15篇，日平均阅读量破万</span>。</p>
+        <ul class="work-bullets">
+          <li><strong>爆款内容生产</strong>：持续跟踪OpenAI、DeepSeek等AI圈技术热点，擅长在热点中找到科技媒体独特切入角，多篇10w+爆款，提升媒体品牌行业影响力（新榜AI账号TOP 30）。</li>
+          <li><strong>产品测评与深度解析</strong>：体验最新AI产品、模型，结合实际应用场景，撰写测评、深度解析文章、设计并执行产品采访提纲等。</li>
+        </ul>
       </div>
       <div class="work-date">2024.02<br>2025.09</div>
     </li>
@@ -1149,29 +1168,13 @@
       <div>
         <div class="work-title">大会主编</div>
         <div class="work-co">LiveVideoStack · 北京石策木蔼科技</div>
-        <div class="work-highlights">
-          <span class="work-hl-tag">NPS 77.32%</span>
-          <span class="work-hl-tag">300人峰会 · 13个技术专场</span>
-          <span class="work-hl-tag">70+讲师统筹</span>
-        </div>
-        <p class="work-desc">统筹音视频技术大会全部内容，把控主会场及13个技术专场共50+演讲，协调火山引擎、腾讯云音视频、阿里云、快手等企业技术专家与高校教授；大会参会者NPS 77.32%。同期策划"AIGC与音视频未来"专题采访，采访网易云商、特看科技、荔枝等企业AI技术负责人，探讨AIGC在媒体、教育、电商多赛道的应用与前景。</p>
+        <p class="work-intro">统筹音视频技术大会全部内容，<span class="hl">会议规模300+，参会者NPS 77.32%</span>。</p>
+        <ul class="work-bullets">
+          <li><strong>大会内容统筹</strong>：音视频技术领域top级会议主编，把控主会场及13个技术专场共50+演讲，邀请火山引擎、腾讯云音视频、阿里云、快手等企业技术专家及高校教授共70+讲师。</li>
+          <li><strong>专题策划与采访</strong>：策划执行《AIGC与音视频未来》专题，采访网易云商、特看科技、荔枝等企业AI技术负责人，探讨AIGC在媒体、教育、电商多赛道应用前景。</li>
+        </ul>
       </div>
       <div class="work-date">2023.06<br>2024.01</div>
-    </li>
-
-    <li class="work-item reveal d3">
-      <span class="work-idx">04.</span>
-      <div>
-        <div class="work-title">内容运营（实习）</div>
-        <div class="work-co">北京易观数字科技 · 易观分析</div>
-        <div class="work-highlights">
-          <span class="work-hl-tag">白皮书月下载2k+</span>
-          <span class="work-hl-tag">跟进228条线索 · 转化5笔</span>
-          <span class="work-hl-tag">涨粉5000+</span>
-        </div>
-        <p class="work-desc">负责"易观方舟"公众号与知乎号运营，输出专业文章20余篇，涨粉5000+；编辑排版并推广B2B白皮书《DTC品牌私域用户运营手册》，月内下载量超2k，跟进有效线索228条，成功转化订单5笔。</p>
-      </div>
-      <div class="work-date">2021.07<br>2021.12</div>
     </li>
 
   </ul>
@@ -1245,8 +1248,18 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  const workHlObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('hl-in'); });
+  }, { threshold: 0.55 });
+  document.querySelectorAll('.work-item').forEach(el => workHlObserver.observe(el));
+
   document.querySelectorAll('.hero-bio .hl').forEach((span, i) => {
     span.style.transitionDelay = `${0.2 + i * 0.2}s`;
+  });
+  document.querySelectorAll('.work-item').forEach(item => {
+    item.querySelectorAll('.hl').forEach((span, i) => {
+      span.style.transitionDelay = `${0.3 + i * 0.15}s`;
+    });
   });
 
 
