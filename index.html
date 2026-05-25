@@ -214,9 +214,6 @@
     .hero-bio.in .hl {
       background-size: 100% 100%;
     }
-    .work-item.hl-in .hl {
-      background-size: 100% 100%;
-    }
     .hero-buttons {
       display: flex;
       gap: 14px;
@@ -614,21 +611,52 @@
       padding-top: 3px;
       letter-spacing: 0.04em;
     }
+    @keyframes wind-sway {
+      0%   { rotate: 0deg; }
+      18%  { rotate: -8deg; }
+      38%  { rotate: 5deg; }
+      55%  { rotate: -3deg; }
+      72%  { rotate: 1.5deg; }
+      88%  { rotate: -0.4deg; }
+      100% { rotate: 0deg; }
+    }
     .work-title {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 21px;
+      font-size: 19px;
       color: var(--ink);
-      line-height: 1.25;
-      width: fit-content;
-      padding: 5px 22px 7px 14px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      padding-top: 8px;
+      min-width: 240px;
+      height: 104px;
+      padding: 0 100px 0 36px;
       margin-bottom: 8px;
-      border-radius: 4px 44px 44px 4px;
       position: relative;
+      cursor: default;
     }
-    .work-item:nth-of-type(1) .work-title { background: var(--mint); }
-    .work-item:nth-of-type(2) .work-title { background: var(--rose-card); }
-    .work-item:nth-of-type(3) .work-title { background: var(--cream); }
+    .work-title.wind-swaying {
+      animation: wind-sway 0.95s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .branch-swaying {
+      animation: wind-sway 0.95s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-box: view-box;
+    }
+    .work-leaf-bg {
+      position: absolute;
+      top: -33px;
+      left: -90px;
+      width: calc(100% + 90px);
+      height: 180%;
+      object-fit: fill;
+      z-index: -1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .work-item:nth-of-type(1) .work-leaf-bg { filter: saturate(1.1); }
+    .work-item:nth-of-type(2) .work-leaf-bg { filter: hue-rotate(12deg) brightness(0.8) saturate(1.15); }
+    .work-item:nth-of-type(3) .work-leaf-bg { filter: hue-rotate(-16deg) brightness(1.1) saturate(0.85); }
     .work-co {
       font-size: 11px;
       letter-spacing: 0.14em;
@@ -1128,6 +1156,7 @@
   </div>
 </div>
 
+
 <!-- ── 03 工作经历 ── -->
 <div class="section-wrap" id="work">
   <div class="section-rule"></div>
@@ -1140,7 +1169,7 @@
     <li class="work-item reveal">
       <span class="work-idx">01.</span>
       <div>
-        <div class="work-title">B端内容运营</div>
+        <div class="work-title"><img class="work-leaf-bg" src="导航页 SVG/叶子 2.svg" alt="">B端内容运营</div>
         <div class="work-co">北京新橙科技 · Alpha AI产品线</div>
         <p class="work-intro">围绕法律AI产品 AlphaGPT，面向律所管理层做<span class="hl">AI应用教育与品牌内容运营</span>。</p>
         <ul class="work-bullets">
@@ -1155,7 +1184,7 @@
     <li class="work-item reveal d1">
       <span class="work-idx">02.</span>
       <div>
-        <div class="work-title">AI方向技术编辑</div>
+        <div class="work-title"><img class="work-leaf-bg" src="导航页 SVG/叶子 2.svg" alt="">AI方向技术编辑</div>
         <div class="work-co">51CTO · 北京无忧创想信息科技</div>
         <p class="work-intro">深度追踪大模型领域，产出AI热点与深度策划内容，<span class="hl">月均10-15篇，日平均阅读量破万</span>。</p>
         <ul class="work-bullets">
@@ -1169,7 +1198,7 @@
     <li class="work-item reveal d2">
       <span class="work-idx">03.</span>
       <div>
-        <div class="work-title">大会主编</div>
+        <div class="work-title"><img class="work-leaf-bg" src="导航页 SVG/叶子 2.svg" alt="">大会主编</div>
         <div class="work-co">LiveVideoStack · 北京石策木蔼科技</div>
         <p class="work-intro">统筹音视频技术大会全部内容，<span class="hl">会议规模300+，参会者NPS 77.32%</span>。</p>
         <ul class="work-bullets">
@@ -1251,18 +1280,8 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  const workHlObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('hl-in'); });
-  }, { threshold: 0.55 });
-  document.querySelectorAll('.work-item').forEach(el => workHlObserver.observe(el));
-
   document.querySelectorAll('.hero-bio .hl').forEach((span, i) => {
     span.style.transitionDelay = `${0.2 + i * 0.2}s`;
-  });
-  document.querySelectorAll('.work-item').forEach(item => {
-    item.querySelectorAll('.hl').forEach((span, i) => {
-      span.style.transitionDelay = `${0.3 + i * 0.15}s`;
-    });
   });
 
 
@@ -1282,78 +1301,109 @@
     const items = [...list.querySelectorAll('.work-item')];
     const titles = items.map(it => it.querySelector('.work-title'));
 
-    // hide titles before first paint
-    titles.forEach(t => {
-      t.style.opacity = '0';
-      t.style.transform = 'scale(0.7) translateX(-10px)';
-    });
+    // Pre-hide with opacity only (no transform) so getBoundingClientRect stays accurate
+    titles.forEach(t => { t.style.opacity = '0'; });
 
     requestAnimationFrame(() => {
       const listRect = list.getBoundingClientRect();
       const H = list.offsetHeight;
       const W = list.offsetWidth;
-      const vx = 26; // vine x in the 52px index column
+      const vx = 26;
 
-      // Leaf positions: y-midpoint and x-left-edge relative to list
+      // Measure BEFORE applying transforms (leaf is 100px wider than div on right)
       const leaves = items.map((item, i) => {
         const t = titles[i];
         const tr = t.getBoundingClientRect();
+        const tw = t.offsetWidth;
+        const th = t.offsetHeight;
         return {
-          y: tr.top - listRect.top + tr.height / 2,
-          x: tr.left - listRect.left
+          stemX: tr.left - listRect.left + (tw + 60) * 0.014,
+          stemY: tr.top  - listRect.top  + th * 0.45,
         };
       });
 
-      // Build SVG
+      // NOW apply entrance transform (after measuring)
+      titles.forEach(t => {
+        t.style.transform = 'scale(0.72) translateX(-10px)';
+      });
+
       const svg = document.createElementNS(svgNS, 'svg');
       Object.assign(svg.style, {
-        position: 'absolute', left: '0', top: '0',
+        position: 'absolute', left: '0', top: '-5px',
         width: W + 'px', height: H + 'px',
         pointerEvents: 'none', overflow: 'visible', zIndex: '0'
       });
       svg.setAttribute('width', W);
       svg.setAttribute('height', H);
 
-      // Vine stem: path goes BOTTOM → TOP so dashoffset animation = bottom-to-top growth
-      const rev = [...leaves].reverse(); // start from bottom leaf
+      // Main vine: bottom→top, each segment has unique curvature
+      const segParams = [
+        { w: 14, r: 0.30 },  // bottom segment: lean right
+        { w: -9, r: 0.38 },  // middle segment: lean left, lazier curve
+        { w: 16, r: 0.26 },  // top segment: lean right, tighter
+        { w: -11, r: 0.34 }, // fallback
+      ];
+      const rev = [...leaves].reverse();
       let d = `M ${vx} ${H}`;
       let prevY = H;
-      rev.forEach(({ y }, i) => {
-        const w = i % 2 === 0 ? 10 : -10;
-        const dist = prevY - y;
-        d += ` C ${vx + w} ${prevY - dist * 0.32}, ${vx - w} ${y + dist * 0.32}, ${vx} ${y}`;
-        prevY = y;
+      rev.forEach(({ stemY }, i) => {
+        const { w, r } = segParams[i % segParams.length];
+        const dist = prevY - stemY;
+        d += ` C ${vx + w} ${prevY - dist * r}, ${vx - w * 0.65} ${stemY + dist * r}, ${vx} ${stemY}`;
+        prevY = stemY;
       });
-      d += ` C ${vx + 6} ${prevY * 0.55}, ${vx - 6} ${prevY * 0.15}, ${vx} 0`;
+      d += ` C ${vx + 9} ${prevY * 0.52}, ${vx - 5} ${prevY * 0.16}, ${vx} 0`;
 
       const stem = document.createElementNS(svgNS, 'path');
       stem.setAttribute('d', d);
       stem.setAttribute('fill', 'none');
       stem.setAttribute('stroke', 'var(--vine)');
-      stem.setAttribute('stroke-width', '2.5');
+      stem.setAttribute('stroke-width', '6.5');
       stem.setAttribute('stroke-linecap', 'round');
       stem.setAttribute('stroke-linejoin', 'round');
       svg.appendChild(stem);
 
-      // Branch paths from vine to each leaf's left edge
-      const branchEls = leaves.map(({ x, y }) => {
+      // Branches — each with its own character, all ending at the leaf's stem nub
+      const branchFns = [
+        // item 0: gentle upward arc
+        (sx, sy) => {
+          const mid = vx + (sx - vx) * 0.42;
+          return `M ${vx} ${sy} C ${mid} ${sy - 18}, ${sx - 18} ${sy - 6}, ${sx} ${sy}`;
+        },
+        // item 1: slight downward sag (droopy branch)
+        (sx, sy) => {
+          const mid = vx + (sx - vx) * 0.5;
+          return `M ${vx} ${sy} Q ${mid} ${sy + 12} ${sx} ${sy}`;
+        },
+        // item 2: S-curve branch
+        (sx, sy) => {
+          const m1 = vx + (sx - vx) * 0.35;
+          const m2 = vx + (sx - vx) * 0.72;
+          return `M ${vx} ${sy} C ${m1} ${sy - 22}, ${m2} ${sy + 12}, ${sx} ${sy}`;
+        },
+      ];
+
+      // Colors approximating each leaf's filtered appearance
+      const leafColors = ['#8BAE78', '#6A9640', '#9BBF7A'];
+
+      const branchEls = leaves.map(({ stemX: _sx, stemY }, i) => {
+        const stemX = _sx + (_sx - vx) * (i === 1 ? 0.3 : 0.1);
         const b = document.createElementNS(svgNS, 'path');
-        const mx = vx + (x - vx) * 0.52;
-        b.setAttribute('d', `M ${vx} ${y} Q ${mx} ${y - 11} ${x - 3} ${y}`);
+        b.setAttribute('d', branchFns[i % branchFns.length](stemX, stemY));
         b.setAttribute('fill', 'none');
-        b.setAttribute('stroke', 'var(--vine)');
-        b.setAttribute('stroke-width', '1.5');
+        b.setAttribute('stroke', leafColors[i]);
+        b.setAttribute('stroke-width', '4.68');
         b.setAttribute('stroke-linecap', 'round');
         svg.appendChild(b);
         return b;
       });
 
-      // Decorative dots at vine-leaf junctions
-      const dotEls = leaves.map(({ y }) => {
+      const dotEls = leaves.map(({ stemY }, i) => {
         const c = document.createElementNS(svgNS, 'circle');
-        c.setAttribute('cx', vx); c.setAttribute('cy', y);
+        c.setAttribute('cx', vx);
+        c.setAttribute('cy', stemY);
         c.setAttribute('r', '3.5');
-        c.setAttribute('fill', 'var(--vine)');
+        c.setAttribute('fill', leafColors[i]);
         c.style.opacity = '0';
         svg.appendChild(c);
         return c;
@@ -1361,7 +1411,27 @@
 
       list.insertBefore(svg, list.firstChild);
 
-      // Init dash animations
+      // Wind-sway: leaf + branch rotate around the vine connection point
+      titles.forEach((t, i) => {
+        // Pivot = where branch meets main vine, expressed in each element's local coords
+        const pivotX = vx - t.offsetLeft;          // negative: pivot is left of the div
+        const pivotY = t.offsetHeight * 0.45;       // stem nub vertical position
+        t.style.transformOrigin = `${pivotX}px ${pivotY}px`;
+
+        // SVG branch: origin in view-box coordinates
+        branchEls[i].style.transformOrigin = `${vx}px ${leaves[i].stemY}px`;
+
+        t.addEventListener('mouseenter', () => {
+          t.classList.remove('wind-swaying');
+          branchEls[i].classList.remove('branch-swaying');
+          void t.getBoundingClientRect();
+          t.classList.add('wind-swaying');
+          branchEls[i].classList.add('branch-swaying');
+        });
+        t.addEventListener('animationend', () => t.classList.remove('wind-swaying'));
+        branchEls[i].addEventListener('animationend', () => branchEls[i].classList.remove('branch-swaying'));
+      });
+
       const stemLen = stem.getTotalLength();
       stem.style.strokeDasharray = stemLen;
       stem.style.strokeDashoffset = stemLen;
@@ -1371,28 +1441,22 @@
         b.style.strokeDashoffset = l;
       });
 
-      const TOTAL = 2000; // vine growth ms
+      const TOTAL = 2000;
 
       const trigger = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) return;
         trigger.disconnect();
-
-        // Grow vine
         stem.style.transition = `stroke-dashoffset ${TOTAL}ms cubic-bezier(0.4, 0, 0.2, 1)`;
         stem.style.strokeDashoffset = '0';
 
-        // Stagger each leaf: fire when vine reaches its y-position
-        leaves.forEach(({ y }, i) => {
-          const prop = (H - y) / H; // 0=bottom, 1=top
+        leaves.forEach(({ stemY }, i) => {
+          const prop = (H - stemY) / H;
           const delay = Math.round(prop * TOTAL);
           setTimeout(() => {
-            // dot
             dotEls[i].style.transition = 'opacity 0.2s ease';
             dotEls[i].style.opacity = '1';
-            // branch
-            branchEls[i].style.transition = 'stroke-dashoffset 0.38s ease';
+            branchEls[i].style.transition = 'stroke-dashoffset 0.4s ease';
             branchEls[i].style.strokeDashoffset = '0';
-            // leaf pop
             titles[i].style.transition = 'opacity 0.42s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
             titles[i].style.opacity = '1';
             titles[i].style.transform = 'scale(1) translateX(0)';
