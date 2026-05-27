@@ -6,6 +6,7 @@
     "screenshot": "node screenshot.js"
   },
   "dependencies": {
+    "lottie-web": "^5.13.0",
     "puppeteer": "^25.0.4"
   },
   "devDependencies": {

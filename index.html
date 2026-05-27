@@ -6,7 +6,8 @@
   <title>李美涵 — AI内容运营</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+  <script src="node_modules/lottie-web/build/player/lottie.min.js"></script>
   <style>
     :root {
       --bg: #FFFFFF;
@@ -705,37 +706,6 @@
       line-height: 1.6;
     }
 
-    /* ── EXPERTISE ── */
-    .expertise-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .exp-card {
-      padding: 36px 28px 40px;
-    }
-    .exp-card-num {
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: 12px;
-      color: rgba(28, 22, 20, 0.3);
-      margin-bottom: 24px;
-      letter-spacing: 0.08em;
-    }
-    .exp-card-title {
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: 21px;
-      color: var(--ink);
-      line-height: 1.3;
-      margin-bottom: 16px;
-    }
-    .exp-card-body {
-      font-size: 13.5px;
-      color: var(--body);
-      line-height: 1.85;
-    }
-
     /* ── CONTACT ── */
     .contact-inner {
       display: grid;
@@ -744,12 +714,12 @@
       align-items: center;
     }
     .contact-hl {
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: clamp(36px, 4.5vw, 54px);
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(52px, 6.5vw, 78px);
       color: var(--ink);
       line-height: 1.2;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
+      padding-left: 30px;
     }
     .contact-right {
       display: flex;
@@ -955,7 +925,50 @@
     }
     .ls-photo  { width: 182px; left: 820px; top:  70px; z-index: 4; }
     .ls-medal  { width: 160px; left: 1030px; top: 195px; z-index: 4; }
-    .ls-coffee { width: 222px; left: 880px; top: 370px; z-index: 2; }
+    .ls-coffee {
+      position: absolute;
+      width: 222px; left: 880px; top: 370px; z-index: 2;
+      display: block;
+      text-decoration: none;
+      cursor: url('导航页 SVG/小手.svg') 57 39, auto;
+    }
+    .ls-coffee img {
+      position: static !important;
+      width: 100%;
+      display: block;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.4s ease;
+    }
+    .ls-coffee:hover img {
+      transform: translateY(-10px) scale(1.035);
+      filter: drop-shadow(0 20px 40px rgba(200, 160, 120, 0.55))
+              drop-shadow(0 6px 14px rgba(28, 22, 20, 0.13));
+    }
+    .ls-coffee-tip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%) translateY(-6px);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--divider);
+      padding: 5px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .ls-coffee:hover .ls-coffee-tip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0px);
+    }
 
     /* ── ANIMATIONS ── */
     .reveal {
@@ -994,7 +1007,6 @@
       .work-item { grid-template-columns: 44px 1fr; gap: 16px; }
       .work-date { display: none; }
 
-      .expertise-grid { grid-template-columns: 1fr; gap: 14px; }
 
       .contact-inner { grid-template-columns: 1fr; gap: 40px; }
 
@@ -1053,7 +1065,10 @@
     <img class="ls-paper"  src="导航页 SVG/纸团.svg"     alt="">
     <img class="ls-photo"  src="导航页 SVG/照片.svg"     alt="">
     <img class="ls-medal"  src="导航页 SVG/奖牌.svg"     alt="">
-    <img class="ls-coffee" src="导航页 SVG/咖啡贝果.svg" alt="">
+    <a class="ls-coffee" href="#contact">
+      <img src="导航页 SVG/咖啡贝果.svg" alt="">
+      <span class="ls-coffee-tip">Contact</span>
+    </a>
   </div>
 </section>
 
@@ -1262,55 +1277,36 @@
   </ul>
 </div>
 
-<!-- ── 04 核心能力 ── -->
-<div class="section-wrap" id="expertise">
-  <div class="section-rule"></div>
-  <div class="section-tag reveal">
-    <span class="section-num-big">04</span>
-    <span class="section-label-text">核心能力</span>
-  </div>
-  <div class="expertise-grid">
-    <div class="exp-card reveal" style="background: var(--mint);">
-      <div class="exp-card-num">01 —</div>
-      <h3 class="exp-card-title">热点洞察<br>· 爆款生产</h3>
-      <p class="exp-card-body">每月追踪大模型与科技热点，拆解选题逻辑，在截稿压力下快速产出高传播量内容。TikTok禁令、DeepSeek冲击、程序员失业……懂得在热点中找到科技媒体的独特切入角，多篇10w+爆款为证。</p>
-    </div>
-    <div class="exp-card reveal d1" style="background: var(--rose-card);">
-      <div class="exp-card-num">02 —</div>
-      <h3 class="exp-card-title">B端品牌<br>· 活动统筹</h3>
-      <p class="exp-card-body">从品牌物料、客户PR稿到白皮书，懂得围绕产品价值搭建内容矩阵；同时具备大型技术峰会全流程统筹经验——选题立项、讲师沟通、现场执行，NPS 77.32%的口碑是结果。</p>
-    </div>
-    <div class="exp-card reveal d2" style="background: var(--cream);">
-      <div class="exp-card-num">03 —</div>
-      <h3 class="exp-card-title">深度内容<br>· 全形态交付</h3>
-      <p class="exp-card-body">行业观察、产品测评、人物访谈、技术白皮书、短视频脚本——不同形态都有实际交付。DeepSeek入门宝典（技术解析+开发实战）、爱奇艺AI品牌稿、阳光电源跨行业AI报道，客户覆盖能源、娱乐、法律多个行业。</p>
-    </div>
-  </div>
-</div>
-
-<!-- ── 05 联系 ── -->
+<!-- ── 04 联系 ── -->
 <div class="section-wrap" id="contact">
   <div class="section-rule"></div>
-  <div class="section-tag reveal">
-    <span class="section-num-big">05</span>
-    <span class="section-label-text">联系</span>
+  <div class="pf-heading reveal">
+    <img src="导航页 SVG/咖啡贝果.svg" class="pf-heading-icon" alt="">
+    <span class="pf-heading-title">Contact</span>
   </div>
   <div class="contact-inner">
-    <h2 class="contact-hl reveal">一起做<br>真正有用的<br>AI内容。</h2>
+    <h2 class="contact-hl reveal">Let's work together.</h2>
     <div class="contact-right reveal d1">
-      <p class="contact-body">开放内容运营、技术品牌公关及相关咨询合作。北京 · 可异地。期待和真正在做AI的团队聊聊。</p>
-      <a href="mailto:limeihan.y@gmail.com" class="contact-link">limeihan.y@gmail.com</a>
+      <a href="mailto:18340085228@163.com" class="contact-link">18340085228@163.com</a>
+      <div id="keyboard-lottie" style="width:300px;margin-top:36px;opacity:0.75;"></div>
     </div>
   </div>
 </div>
 
 <!-- ── FOOTER ── -->
 <footer>
-  <span class="footer-sig">李美涵</span>
   <span class="footer-meta">北京 · 2026</span>
 </footer>
 
 <script>
+  lottie.loadAnimation({
+    container: document.getElementById('keyboard-lottie'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'keyboard.json'
+  });
+
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 30);
