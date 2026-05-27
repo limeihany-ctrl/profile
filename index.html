@@ -607,8 +607,17 @@
       padding: 44px 0;
       border-bottom: 1px solid var(--divider);
       align-items: start;
+      position: relative;
     }
     .work-item:first-child { border-top: 1px solid var(--divider); }
+    .work-deco-plant {
+      position: absolute;
+      bottom: 44px;
+      right: 0;
+      width: 190px;
+      pointer-events: none;
+      user-select: none;
+    }
     .work-idx {
       font-family: Georgia, serif;
       font-style: italic;
@@ -1246,6 +1255,7 @@
         </ul>
       </div>
       <div class="work-date">2025.11<br>2026.03</div>
+      <img class="work-deco-plant" src="导航页 SVG/plants 植物.svg" alt="">
     </li>
 
     <li class="work-item reveal d1">
@@ -1260,6 +1270,7 @@
         </ul>
       </div>
       <div class="work-date">2024.02<br>2025.09</div>
+      <img class="work-deco-plant" src="导航页 SVG/植物2.svg" alt="">
     </li>
 
     <li class="work-item reveal d2">
@@ -1274,6 +1285,7 @@
         </ul>
       </div>
       <div class="work-date">2023.06<br>2024.01</div>
+      <img class="work-deco-plant" src="导航页 SVG/植物3.svg" alt="">
     </li>
 
   </ul>
