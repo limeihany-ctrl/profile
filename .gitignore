@@ -1,2 +1,18 @@
 node_modules/
 screenshots/
+
+# 个人简历文件（不公开）
+document/李美涵-简历 5.25.docx
+document/李美涵-3年工作经验.pdf
+document/李美涵- 作品集 .docx
+
+# 超出 GitHub 100MB 限制的大文件
+document/法律 AI 产品 Alpha 用户手册.pdf
+
+# 开发辅助脚本
+_screenshot_work.js
+CLAUDE_1.md
+
+# 日志文件
+serve.log
+serve_err.log
